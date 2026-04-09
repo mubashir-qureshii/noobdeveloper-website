@@ -18,6 +18,12 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
+<script type="text/javascript">
+  emailjs.init({
+    publicKey: "YOUR_PUBLIC_KEY_HERE"
+  });
+</script>
   <style>
     /* ===========================
        CSS Custom Properties
@@ -1970,7 +1976,8 @@
     /* =========================================
        Contact Form Validation
     ========================================= */
-    (function initContactForm() {
+   /*
+     (function initContactForm() {
       var form = document.getElementById('contact-form');
       if (!form) return;
       var fields = {
@@ -2026,6 +2033,112 @@
         }, 1200);
       });
     }());
+    */
+    /* 
+Contact Form with EmailJS Integration
+========================================= */
+(function initContactForm() {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  
+  var fields = {
+    'f-name':    { errId: 'err-name',    validate: function (v) { return v.trim().length >= 2; } },
+    'f-email':   { errId: 'err-email',   validate: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); } },
+    'f-subject': { errId: 'err-subject', validate: function (v) { return v.trim().length >= 3; } },
+    'f-message': { errId: 'err-message', validate: function (v) { return v.trim().length >= 10; } }
+  };
+
+  function setFieldState(id, valid) {
+    var input = document.getElementById(id);
+    var err = document.getElementById(fields[id].errId);
+    if (!input || !err) return;
+    if (valid) {
+      input.classList.remove('error');
+      err.classList.remove('visible');
+    } else {
+      input.classList.add('error');
+      err.classList.add('visible');
+    }
+  }
+
+  // Real-time validation
+  Object.keys(fields).forEach(function (id) {
+    var input = document.getElementById(id);
+    if (!input) return;
+    input.addEventListener('blur', function () {
+      setFieldState(id, fields[id].validate(input.value));
+    });
+    input.addEventListener('input', function () {
+      if (input.classList.contains('error')) {
+        setFieldState(id, fields[id].validate(input.value));
+      }
+    });
+  });
+
+  // Form submission
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+    var allValid = true;
+    Object.keys(fields).forEach(function (id) {
+      var input = document.getElementById(id);
+      var valid = input && fields[id].validate(input.value);
+      setFieldState(id, valid);
+      if (!valid) allValid = false;
+    });
+
+    if (!allValid) return;
+
+    var btn = document.getElementById('form-submit-btn');
+    var successDiv = document.getElementById('form-success');
+    
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+    // Collect form data
+    var templateParams = {
+      to_email: '25-arid-3498@student.uaar.edu.pk',
+      from_name: document.getElementById('f-name').value,
+      from_email: document.getElementById('f-email').value,
+      subject: document.getElementById('f-subject').value,
+      message: document.getElementById('f-message').value
+    };
+
+    // Send email using EmailJS
+    emailjs.send('service_saoce3n', 'template_tf4dh1k', templateParams)
+      .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        
+        // Hide form and show success message
+        form.querySelectorAll('.form-group, .form-row, .form-submit').forEach(function (el) {
+          el.style.display = 'none';
+        });
+        if (successDiv) successDiv.classList.add('visible');
+        
+        // Reset form after 5 seconds
+        setTimeout(resetForm, 5000);
+      }, function(error) {
+        console.log('FAILED...', error);
+        
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+        alert('Error sending message. Please try again.');
+      });
+  });
+
+  // Reset form function
+  function resetForm() {
+    form.reset();
+    form.querySelectorAll('.form-group, .form-row, .form-submit').forEach(function (el) {
+      el.style.display = '';
+    });
+    var successDiv = document.getElementById('form-success');
+    if (successDiv) successDiv.classList.remove('visible');
+    var btn = document.getElementById('form-submit-btn');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send Message';
+  }
+}());
     /* =========================================
        AOS Init
     ========================================= */
