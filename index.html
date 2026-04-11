@@ -1083,6 +1083,59 @@
       .hero-float-card { display: none; }
       .services-grid { grid-template-columns: 1fr; }
     }
+    /* Mobile Responsiveness CSS */
+
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .avatar {
+    width: 180px;
+    height: auto;
+  }
+  section {
+    padding: 50px 0;
+  }
+  .hero p {
+    font-size: 0.9rem;
+  }
+  .float-cards {
+    display: none;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .skills {
+    grid-template-columns: 1fr;
+  }
+  .timeline-columns {
+    grid-template-columns: 1fr;
+  }
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 60px 0 40px;
+  }
+  .nav-logo {
+    font-size: 1.1rem;
+  }
+  .hero-name {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+  }
+  .contact-form {
+    padding: 20px;
+  }
+  .footer {
+    padding: 40px 0 20px;
+  }
+}
   </style>
 </head>
 <body>
