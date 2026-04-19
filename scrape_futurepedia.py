@@ -17,6 +17,7 @@ from dataclasses import dataclass, field, asdict
 from typing import Optional
 
 import pandas as pd
+from openpyxl.styles import Alignment
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -334,12 +335,20 @@ class FuturepediaScraper:
         log.info("Parsing done. Unique tools: %d", len(self._tools))
 
     # ── Persistence ────────────────────────────────────────────────────────────
+    # Maps dataclass field names → display column headers (single source of truth)
+    _COLUMN_MAP = {
+        "name": "Tool Name",
+        "description": "Description",
+        "pricing": "Pricing",
+        "rating": "Rating",
+        "reviews": "Reviews",
+        "url": "URL",
+    }
+
     def _build_dataframe(self) -> pd.DataFrame:
         rows = [asdict(t) for t in self._tools]
-        df = pd.DataFrame(rows, columns=["name", "description", "pricing",
-                                          "rating", "reviews", "url"])
-        df.columns = ["Tool Name", "Description", "Pricing",
-                      "Rating", "Reviews", "URL"]
+        df = pd.DataFrame(rows, columns=list(self._COLUMN_MAP.keys()))
+        df.rename(columns=self._COLUMN_MAP, inplace=True)
         return df
 
     def save_excel(self, path: str = OUTPUT_EXCEL):
@@ -361,7 +370,6 @@ class FuturepediaScraper:
                 ws.column_dimensions[col].width = width
 
             # Wrap description column
-            from openpyxl.styles import Alignment
             for row in ws.iter_rows(min_row=2, min_col=2, max_col=2):
                 for cell in row:
                     cell.alignment = Alignment(wrap_text=True, vertical="top")
