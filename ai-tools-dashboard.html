@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Tools Dashboard — Searchable directory of AI tools with ratings, pricing, and categories." />
+  <meta name="author" content="Mubashir Qureshi" />
+  <link rel="icon" type="image/png" href="icon_.png">
+  <title>AI Tools Dashboard — Mubashir Qureshi</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ===========================
+       CSS Custom Properties
+    =========================== */
+    :root {
+      --cyan:        #00D9FF;
+      --cyan-light:  #80ECFF;
+      --cyan-dark:   #00A8C8;
+      --gold:        #FFB347;
+      --gold-light:  #FFCF77;
+      --bg-primary:  #060B18;
+      --bg-secondary:#0D1628;
+      --bg-card:     #111827;
+      --bg-glass:    rgba(13, 22, 40, 0.85);
+      --text-primary:#F0F6FF;
+      --text-secondary:#8FA3BF;
+      --border:      rgba(0, 217, 255, 0.18);
+      --shadow-cyan: 0 0 30px rgba(0, 217, 255, 0.25);
+      --shadow-gold: 0 0 30px rgba(255, 179, 71, 0.25);
+      --radius:      14px;
+      --transition:  0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    [data-theme="light"] {
+      --bg-primary:   #F0F6FF;
+      --bg-secondary: #E2EAF8;
+      --bg-card:      #FFFFFF;
+      --bg-glass:     rgba(240, 246, 255, 0.9);
+      --text-primary: #0D1628;
+      --text-secondary:#4A5568;
+      --border:       rgba(0, 155, 180, 0.2);
+    }
+    /* ===========================
+       Reset & Base
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    /* ===========================
+       Scrollbar
+    =========================== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan-dark); border-radius: 3px; }
+    /* ===========================
+       Utility
+    =========================== */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .section-title span { color: var(--cyan); }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+    }
+    .section-header { margin-bottom: 40px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-desc { margin: 0 auto; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+      color: #000;
+      box-shadow: 0 6px 20px rgba(0,217,255,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,217,255,0.45); }
+    .btn-outline {
+      border: 1.5px solid var(--border);
+      color: var(--text-secondary);
+      background: var(--bg-card);
+    }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+    .divider {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--gold));
+      border-radius: 2px;
+      margin: 18px 0;
+    }
+    .divider.center { margin: 18px auto; }
+    /* ===========================
+       Navigation
+    =========================== */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .nav-logo .dot { color: var(--cyan); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: relative;
+      transition: color var(--transition);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--cyan);
+      border-radius: 1px;
+      transition: width var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    #theme-toggle {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      transition: all var(--transition);
+      background: var(--bg-card);
+    }
+    #theme-toggle:hover { color: var(--cyan); border-color: var(--cyan); }
+    #hamburger {
+      display: none;
+      width: 40px; height: 40px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px;
+    }
+    #hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+    #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #hamburger.open span:nth-child(2) { opacity: 0; }
+    #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 13px 24px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+      border-left: 3px solid transparent;
+    }
+    .mobile-menu a:hover { color: var(--cyan); border-left-color: var(--cyan); background: rgba(0,217,255,0.05); }
+    /* ===========================
+       Page Layout
+    =========================== */
+    .page-wrapper {
+      padding-top: 90px;
+      min-height: 100vh;
+    }
+    .dashboard-header {
+      padding: 50px 0 30px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+    /* ===========================
+       Stats Row
+    =========================== */
+    .stats-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 26px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 160px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .stat-card:hover { border-color: rgba(0,217,255,0.35); box-shadow: var(--shadow-cyan); }
+    .stat-card-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: rgba(0,217,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+    .stat-card-icon.gold { background: rgba(255,179,71,0.1); color: var(--gold); }
+    .stat-card-label { font-size: 0.78rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 2px; }
+    .stat-card-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+    /* ===========================
+       Filters & Controls
+    =========================== */
+    .controls-bar {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+    }
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+    }
+    .search-wrap .search-icon {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+    #search-input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      transition: border-color var(--transition);
+    }
+    #search-input:focus {
+      outline: none;
+      border-color: var(--cyan);
+    }
+    #search-input::placeholder { color: var(--text-secondary); }
+    .filter-select {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: border-color var(--transition);
+      min-width: 160px;
+    }
+    .filter-select:focus { outline: none; border-color: var(--cyan); }
+    .filter-select option { background: var(--bg-secondary); }
+    .controls-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+    #results-count {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    #results-count span { color: var(--cyan); font-weight: 600; }
+    /* ===========================
+       Table
+    =========================== */
+    .table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1200px;
+    }
+    thead {
+      background: var(--bg-secondary);
+      border-bottom: 2px solid var(--border);
+    }
+    th {
+      padding: 14px 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      text-align: left;
+      white-space: nowrap;
+      user-select: none;
+      position: relative;
+    }
+    th.sortable { cursor: pointer; }
+    th.sortable:hover { color: var(--cyan-light); }
+    th .sort-icon {
+      margin-left: 6px;
+      opacity: 0.4;
+      font-size: 0.7rem;
+      transition: opacity var(--transition);
+    }
+    th.sort-asc .sort-icon,
+    th.sort-desc .sort-icon { opacity: 1; color: var(--cyan); }
+    th.sort-desc .sort-icon { transform: rotate(180deg); display: inline-block; }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(0, 217, 255, 0.04); }
+    td {
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+    /* Column-specific widths */
+    .col-sno    { width: 56px; text-align: center; color: var(--text-secondary); font-size: 0.8rem; }
+    .col-logo   { width: 60px; text-align: center; }
+    .col-name   { min-width: 160px; font-weight: 600; }
+    .col-cat    { min-width: 140px; }
+    .col-func   { min-width: 200px; color: var(--text-secondary); }
+    .col-kw     { min-width: 180px; }
+    .col-web    { min-width: 110px; }
+    .col-fp     { min-width: 110px; }
+    .col-price  { min-width: 110px; }
+    .col-rating { min-width: 110px; }
+    .col-reviews{ min-width: 100px; text-align: right; }
+    .col-bmark  { min-width: 100px; text-align: right; }
+    .col-src    { min-width: 180px; color: var(--text-secondary); font-size: 0.8rem; }
+    /* Logo cell */
+    .tool-logo {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: var(--bg-secondary);
+      padding: 4px;
+      border: 1px solid var(--border);
+    }
+    .logo-fallback {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(0,217,255,0.2), rgba(255,179,71,0.2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--cyan);
+      border: 1px solid var(--border);
+      margin: 0 auto;
+    }
+    /* AI Name cell */
+    .tool-name-cell { display: flex; align-items: center; gap: 10px; }
+    /* Link button */
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      background: rgba(0,217,255,0.08);
+      color: var(--cyan);
+      border: 1px solid rgba(0,217,255,0.2);
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .link-btn:hover { background: rgba(0,217,255,0.15); border-color: var(--cyan); transform: translateY(-1px); }
+    /* Pricing badge */
+    .price-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .price-free    { background: rgba(0,217,255,0.1); color: var(--cyan); border: 1px solid rgba(0,217,255,0.2); }
+    .price-freemium{ background: rgba(255,179,71,0.1); color: var(--gold); border: 1px solid rgba(255,179,71,0.2); }
+    .price-paid    { background: rgba(255,100,100,0.1); color: #ff6464; border: 1px solid rgba(255,100,100,0.2); }
+    .price-other   { background: rgba(143,163,191,0.1); color: var(--text-secondary); border: 1px solid var(--border); }
+    /* Category badge */
+    .cat-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(0,217,255,0.07);
+      color: var(--cyan-light);
+      border: 1px solid rgba(0,217,255,0.15);
+      white-space: nowrap;
+    }
+    /* Star rating */
+    .rating-cell { display: flex; align-items: center; gap: 6px; }
+    .stars { color: var(--gold); font-size: 0.8rem; letter-spacing: 1px; }
+    .rating-num { font-size: 0.82rem; color: var(--text-secondary); }
+    /* Number cells */
+    .num-cell {
+      font-variant-numeric: tabular-nums;
+      font-size: 0.83rem;
+      color: var(--text-secondary);
+    }
+    /* Keywords */
+    .kw-wrap { display: flex; flex-wrap: wrap; gap: 4px; }
+    .kw-tag {
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.71rem;
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    /* No-results row */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px !important;
+      color: var(--text-secondary);
+    }
+    .no-results i { font-size: 2rem; display: block; margin-bottom: 12px; color: var(--border); }
+    /* ===========================
+       Pagination
+    =========================== */
+    .pagination-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-card);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    .pagination-info { font-size: 0.82rem; color: var(--text-secondary); }
+    .pagination-btns { display: flex; gap: 6px; align-items: center; }
+    .pg-btn {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      transition: all var(--transition);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pg-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+    .pg-btn.active { background: var(--cyan); color: #000; border-color: var(--cyan); font-weight: 700; }
+    .pg-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .per-page-select {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+    .per-page-select:focus { outline: none; border-color: var(--cyan); }
+    /* ===========================
+       Footer
+    =========================== */
+    .dash-footer {
+      text-align: center;
+      padding: 28px 0;
+      margin-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+    .dash-footer span { color: var(--cyan); font-weight: 600; }
+    /* ===========================
+       Back to Top
+    =========================== */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+      color: #000;
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(0,217,255,0.35);
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--transition), transform var(--transition);
+      z-index: 999;
+    }
+    #back-to-top.visible { opacity: 1; pointer-events: auto; }
+    #back-to-top:hover { transform: translateY(-3px); }
+    /* ===========================
+       Responsive
+    =========================== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      #hamburger { display: flex; }
+      .stats-row { gap: 12px; }
+      .stat-card { min-width: 140px; padding: 16px 18px; }
+      .controls-bar { flex-direction: column; align-items: stretch; }
+      .search-wrap { min-width: 100%; }
+      .filter-select { min-width: 100%; }
+      .controls-right { margin-left: 0; justify-content: space-between; }
+      .pagination-bar { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .stat-card-value { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ======= NAVIGATION ======= -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">MQ<span class="dot">.</span></a>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#timeline">Experience</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="ai-tools-dashboard.html" class="active">AI Tools</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button id="theme-toggle" aria-label="Toggle dark/light mode">
+            <i class="fa-solid fa-moon" id="theme-icon"></i>
+          </button>
+          <button id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <div class="mobile-menu" id="mobile-menu" role="menu">
+        <a href="index.html#about" role="menuitem">About</a>
+        <a href="index.html#services" role="menuitem">Services</a>
+        <a href="index.html#skills" role="menuitem">Skills</a>
+        <a href="index.html#projects" role="menuitem">Projects</a>
+        <a href="index.html#timeline" role="menuitem">Experience</a>
+        <a href="index.html#contact" role="menuitem">Contact</a>
+        <a href="ai-tools-dashboard.html" role="menuitem">AI Tools</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======= DASHBOARD ======= -->
+  <div class="page-wrapper">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="dashboard-header">
+        <div class="section-header">
+          <p class="section-label">Data Dashboard</p>
+          <h1 class="section-title">AI Tools <span>Directory</span></h1>
+          <div class="divider"></div>
+          <p class="section-desc">Browse, search and filter the complete AI tools database — sourced from Futurepedia. Use the controls below to find tools by category, pricing, or keyword.</p>
+        </div>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-card-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
+          <div>
+            <div class="stat-card-label">Total Tools</div>
+            <div class="stat-card-value" id="stat-total">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
+          <div>
+            <div class="stat-card-label">Categories</div>
+            <div class="stat-card-value" id="stat-cats">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon gold"><i class="fa-solid fa-star" aria-hidden="true"></i></div>
+          <div>
+            <div class="stat-card-label">Avg Rating</div>
+            <div class="stat-card-value" id="stat-rating">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon"><i class="fa-solid fa-tag" aria-hidden="true"></i></div>
+          <div>
+            <div class="stat-card-label">Free Tools</div>
+            <div class="stat-card-value" id="stat-free">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls-bar">
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+          <input type="text" id="search-input" placeholder="Search by AI name, keyword, or function…" aria-label="Search AI tools" />
+        </div>
+        <select id="filter-category" class="filter-select" aria-label="Filter by category">
+          <option value="">All Categories</option>
+        </select>
+        <select id="filter-pricing" class="filter-select" aria-label="Filter by pricing">
+          <option value="">All Pricing</option>
+          <option value="Free">Free</option>
+          <option value="Freemium">Freemium</option>
+          <option value="Paid">Paid</option>
+        </select>
+        <div class="controls-right">
+          <span id="results-count">Showing <span id="rc-visible">0</span> of <span id="rc-total">0</span> tools</span>
+          <button class="btn btn-outline" id="reset-btn" aria-label="Reset all filters">
+            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrap">
+        <table id="tools-table" aria-label="AI Tools directory table">
+          <thead>
+            <tr>
+              <th class="col-sno">S.No</th>
+              <th class="col-logo">Logo</th>
+              <th class="col-name sortable" data-col="aiName">AI Name <i class="fa-solid fa-sort sort-icon" aria-hidden="true"></i></th>
+              <th class="col-cat sortable" data-col="category">Category <i class="fa-solid fa-sort sort-icon" aria-hidden="true"></i></th>
+              <th class="col-func">Primary Function</th>
+              <th class="col-kw">Keywords</th>
+              <th class="col-web">Website</th>
+              <th class="col-fp">Futurepedia URL</th>
+              <th class="col-price sortable" data-col="pricing">Pricing <i class="fa-solid fa-sort sort-icon" aria-hidden="true"></i></th>
+              <th class="col-rating sortable" data-col="rating">Rating <i class="fa-solid fa-sort sort-icon" aria-hidden="true"></i></th>
+              <th class="col-reviews sortable" data-col="reviewCount">Review Count <i class="fa-solid fa-sort sort-icon" aria-hidden="true"></i></th>
+              <th class="col-bmark sortable" data-col="bookmarkCount">Bookmark Count <i class="fa-solid fa-sort sort-icon" aria-hidden="true"></i></th>
+              <th class="col-src">Source Category Page</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Rows injected by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination-bar" id="pagination-bar">
+        <div class="pagination-info" id="pagination-info">Page 1 of 1</div>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <label for="per-page-select" style="font-size:0.82rem;color:var(--text-secondary);">Rows per page:</label>
+          <select id="per-page-select" class="per-page-select" aria-label="Rows per page">
+            <option value="10">10</option>
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <div class="pagination-btns" id="pagination-btns"></div>
+        </div>
+      </div>
+
+    </div><!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="dash-footer">
+      <div class="container">
+        © 2025 <span>Mubashir Qureshi</span>. All rights reserved. &nbsp;|&nbsp;
+        <a href="index.html" style="color:var(--cyan);">← Back to Portfolio</a>
+      </div>
+    </footer>
+  </div><!-- /.page-wrapper -->
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* =========================================
+       Sample Data
+       Replace this array with your real data
+       (e.g. loaded from a Google Sheets CSV or API).
+       Each object maps exactly to the 13 Excel columns.
+    ========================================= */
+    var AI_TOOLS = [
+      {
+        sNo: 1,
+        aiName: "ChatGPT",
+        category: "Text Generation",
+        primaryFunction: "Conversational AI assistant for writing, coding, and analysis",
+        keywords: "chatbot, writing, coding, assistant",
+        website: "https://chat.openai.com",
+        futurepediaUrl: "https://www.futurepedia.io/tool/chatgpt",
+        pricing: "Freemium",
+        rating: 4.8,
+        reviewCount: 12540,
+        bookmarkCount: 89200,
+        logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/64px-ChatGPT_logo.svg.png",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/text-generation"
+      },
+      {
+        sNo: 2,
+        aiName: "Midjourney",
+        category: "Image Generation",
+        primaryFunction: "Generate high-quality images from text prompts",
+        keywords: "image, art, design, creative",
+        website: "https://www.midjourney.com",
+        futurepediaUrl: "https://www.futurepedia.io/tool/midjourney",
+        pricing: "Paid",
+        rating: 4.7,
+        reviewCount: 9870,
+        bookmarkCount: 74300,
+        logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Midjourney_Emblem.png/64px-Midjourney_Emblem.png",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/image-generation"
+      },
+      {
+        sNo: 3,
+        aiName: "GitHub Copilot",
+        category: "Code Assistant",
+        primaryFunction: "AI pair programmer that suggests code in real time",
+        keywords: "coding, IDE, autocomplete, developer",
+        website: "https://github.com/features/copilot",
+        futurepediaUrl: "https://www.futurepedia.io/tool/github-copilot",
+        pricing: "Freemium",
+        rating: 4.6,
+        reviewCount: 7320,
+        bookmarkCount: 61000,
+        logoUrl: "https://github.githubassets.com/favicons/favicon.png",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/code-assistant"
+      },
+      {
+        sNo: 4,
+        aiName: "DALL·E 3",
+        category: "Image Generation",
+        primaryFunction: "Text-to-image generation integrated with ChatGPT",
+        keywords: "image, art, text-to-image, OpenAI",
+        website: "https://openai.com/dall-e-3",
+        futurepediaUrl: "https://www.futurepedia.io/tool/dall-e-3",
+        pricing: "Freemium",
+        rating: 4.5,
+        reviewCount: 5640,
+        bookmarkCount: 48900,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/image-generation"
+      },
+      {
+        sNo: 5,
+        aiName: "Notion AI",
+        category: "Productivity",
+        primaryFunction: "AI writing and summarisation inside Notion workspace",
+        keywords: "productivity, notes, writing, summarise",
+        website: "https://www.notion.so/product/ai",
+        futurepediaUrl: "https://www.futurepedia.io/tool/notion-ai",
+        pricing: "Paid",
+        rating: 4.4,
+        reviewCount: 4210,
+        bookmarkCount: 38600,
+        logoUrl: "https://www.notion.so/front-static/favicon.ico",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/productivity"
+      },
+      {
+        sNo: 6,
+        aiName: "Jasper",
+        category: "Copywriting",
+        primaryFunction: "Long-form AI content and marketing copy generation",
+        keywords: "copywriting, marketing, blog, SEO",
+        website: "https://www.jasper.ai",
+        futurepediaUrl: "https://www.futurepedia.io/tool/jasper",
+        pricing: "Paid",
+        rating: 4.3,
+        reviewCount: 3890,
+        bookmarkCount: 31200,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/copywriting"
+      },
+      {
+        sNo: 7,
+        aiName: "Runway",
+        category: "Video Generation",
+        primaryFunction: "AI video generation and editing from text or image",
+        keywords: "video, generation, editing, creative",
+        website: "https://runwayml.com",
+        futurepediaUrl: "https://www.futurepedia.io/tool/runway",
+        pricing: "Freemium",
+        rating: 4.5,
+        reviewCount: 3120,
+        bookmarkCount: 29800,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/video-generation"
+      },
+      {
+        sNo: 8,
+        aiName: "ElevenLabs",
+        category: "Voice & Audio",
+        primaryFunction: "Ultra-realistic AI voice synthesis and cloning",
+        keywords: "voice, TTS, audio, podcast, cloning",
+        website: "https://elevenlabs.io",
+        futurepediaUrl: "https://www.futurepedia.io/tool/elevenlabs",
+        pricing: "Freemium",
+        rating: 4.7,
+        reviewCount: 4560,
+        bookmarkCount: 41700,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/voice-audio"
+      },
+      {
+        sNo: 9,
+        aiName: "Perplexity AI",
+        category: "Search & Research",
+        primaryFunction: "AI-powered search engine with cited answers",
+        keywords: "search, research, citations, answers",
+        website: "https://www.perplexity.ai",
+        futurepediaUrl: "https://www.futurepedia.io/tool/perplexity-ai",
+        pricing: "Freemium",
+        rating: 4.6,
+        reviewCount: 5980,
+        bookmarkCount: 52100,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/search-research"
+      },
+      {
+        sNo: 10,
+        aiName: "Grammarly",
+        category: "Writing Assistant",
+        primaryFunction: "AI grammar, spelling and style checker for writing",
+        keywords: "grammar, writing, spelling, style",
+        website: "https://www.grammarly.com",
+        futurepediaUrl: "https://www.futurepedia.io/tool/grammarly",
+        pricing: "Freemium",
+        rating: 4.5,
+        reviewCount: 11200,
+        bookmarkCount: 67400,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/writing-assistant"
+      },
+      {
+        sNo: 11,
+        aiName: "Stable Diffusion",
+        category: "Image Generation",
+        primaryFunction: "Open-source text-to-image AI model",
+        keywords: "image, open-source, art, diffusion",
+        website: "https://stability.ai",
+        futurepediaUrl: "https://www.futurepedia.io/tool/stable-diffusion",
+        pricing: "Free",
+        rating: 4.4,
+        reviewCount: 8760,
+        bookmarkCount: 55300,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/image-generation"
+      },
+      {
+        sNo: 12,
+        aiName: "Claude",
+        category: "Text Generation",
+        primaryFunction: "Conversational AI assistant by Anthropic",
+        keywords: "chatbot, writing, analysis, coding",
+        website: "https://claude.ai",
+        futurepediaUrl: "https://www.futurepedia.io/tool/claude",
+        pricing: "Freemium",
+        rating: 4.7,
+        reviewCount: 7890,
+        bookmarkCount: 63200,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/text-generation"
+      },
+      {
+        sNo: 13,
+        aiName: "Otter.ai",
+        category: "Transcription",
+        primaryFunction: "Real-time meeting transcription and note-taking",
+        keywords: "transcription, meeting, notes, voice",
+        website: "https://otter.ai",
+        futurepediaUrl: "https://www.futurepedia.io/tool/otter-ai",
+        pricing: "Freemium",
+        rating: 4.3,
+        reviewCount: 3410,
+        bookmarkCount: 22800,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/transcription"
+      },
+      {
+        sNo: 14,
+        aiName: "Copy.ai",
+        category: "Copywriting",
+        primaryFunction: "AI marketing copy and content generation",
+        keywords: "copywriting, marketing, social media, ads",
+        website: "https://www.copy.ai",
+        futurepediaUrl: "https://www.futurepedia.io/tool/copy-ai",
+        pricing: "Freemium",
+        rating: 4.2,
+        reviewCount: 2980,
+        bookmarkCount: 19600,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/copywriting"
+      },
+      {
+        sNo: 15,
+        aiName: "Synthesia",
+        category: "Video Generation",
+        primaryFunction: "Create AI avatar videos from text scripts",
+        keywords: "video, avatar, presentation, training",
+        website: "https://www.synthesia.io",
+        futurepediaUrl: "https://www.futurepedia.io/tool/synthesia",
+        pricing: "Paid",
+        rating: 4.4,
+        reviewCount: 2760,
+        bookmarkCount: 24100,
+        logoUrl: "",
+        sourceCategoryPage: "https://www.futurepedia.io/ai-tools/video-generation"
+      }
+    ];
+
+    /* =========================================
+       State
+    ========================================= */
+    var state = {
+      data: AI_TOOLS.slice(),
+      filtered: AI_TOOLS.slice(),
+      sortCol: null,
+      sortDir: 'asc',
+      page: 1,
+      perPage: 25,
+      search: '',
+      filterCat: '',
+      filterPrice: ''
+    };
+
+    /* =========================================
+       DOM refs
+    ========================================= */
+    var tbody      = document.getElementById('table-body');
+    var searchInput= document.getElementById('search-input');
+    var filterCat  = document.getElementById('filter-category');
+    var filterPrice= document.getElementById('filter-pricing');
+    var resetBtn   = document.getElementById('reset-btn');
+    var rcVisible  = document.getElementById('rc-visible');
+    var rcTotal    = document.getElementById('rc-total');
+    var paginationBtns = document.getElementById('pagination-btns');
+    var paginationInfo = document.getElementById('pagination-info');
+    var perPageSel = document.getElementById('per-page-select');
+    var statTotal  = document.getElementById('stat-total');
+    var statCats   = document.getElementById('stat-cats');
+    var statRating = document.getElementById('stat-rating');
+    var statFree   = document.getElementById('stat-free');
+
+    /* =========================================
+       Helpers
+    ========================================= */
+    function escHtml(s) {
+      if (!s) return '';
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function pricingClass(p) {
+      if (!p) return 'price-other';
+      var lp = p.toLowerCase();
+      if (lp === 'free') return 'price-free';
+      if (lp === 'freemium') return 'price-freemium';
+      if (lp === 'paid') return 'price-paid';
+      return 'price-other';
+    }
+
+    function starsHtml(rating) {
+      if (!rating) return '';
+      var full = Math.floor(rating);
+      var half = (rating - full) >= 0.5 ? 1 : 0;
+      var empty = 5 - full - half;
+      var s = '';
+      for (var i = 0; i < full; i++)  s += '<i class="fa-solid fa-star"></i>';
+      if (half)                        s += '<i class="fa-solid fa-star-half-stroke"></i>';
+      for (var j = 0; j < empty; j++) s += '<i class="fa-regular fa-star"></i>';
+      return s;
+    }
+
+    function shortUrl(url) {
+      if (!url) return '';
+      try {
+        var host = new URL(url).hostname.replace(/^www\./, '');
+        return host.length > 22 ? host.slice(0, 20) + '…' : host;
+      } catch (e) {
+        return url.slice(0, 22);
+      }
+    }
+
+    function logoHtml(tool) {
+      if (tool.logoUrl) {
+        return '<img src="' + escHtml(tool.logoUrl) + '" alt="' + escHtml(tool.aiName) + ' logo" class="tool-logo" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';" />'
+             + '<div class="logo-fallback" style="display:none">' + escHtml(tool.aiName.charAt(0)) + '</div>';
+      }
+      return '<div class="logo-fallback">' + escHtml(tool.aiName.charAt(0)) + '</div>';
+    }
+
+    function kwHtml(kw) {
+      if (!kw) return '';
+      return kw.split(',').map(function (k) {
+        var t = k.trim();
+        return t ? '<span class="kw-tag">' + escHtml(t) + '</span>' : '';
+      }).join('');
+    }
+
+    function fmtNum(n) {
+      if (n == null || n === '') return '—';
+      return Number(n).toLocaleString();
+    }
+
+    /* =========================================
+       Populate category dropdown
+    ========================================= */
+    (function buildCategoryFilter() {
+      var cats = {};
+      AI_TOOLS.forEach(function (t) { if (t.category) cats[t.category] = 1; });
+      Object.keys(cats).sort().forEach(function (c) {
+        var opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        filterCat.appendChild(opt);
+      });
+    }());
+
+    /* =========================================
+       Stats
+    ========================================= */
+    function updateStats() {
+      var total = state.data.length;
+      var cats  = {};
+      var ratingSum = 0, ratingCount = 0;
+      var freeCount = 0;
+      state.data.forEach(function (t) {
+        if (t.category) cats[t.category] = 1;
+        if (t.rating) { ratingSum += parseFloat(t.rating); ratingCount++; }
+        if (t.pricing && t.pricing.toLowerCase() === 'free') freeCount++;
+      });
+      statTotal.textContent  = total;
+      statCats.textContent   = Object.keys(cats).length;
+      statRating.textContent = ratingCount ? (ratingSum / ratingCount).toFixed(1) : '—';
+      statFree.textContent   = freeCount;
+    }
+
+    /* =========================================
+       Filter & Sort
+    ========================================= */
+    function applyFilters() {
+      var q   = state.search.toLowerCase().trim();
+      var cat = state.filterCat;
+      var pr  = state.filterPrice;
+
+      state.filtered = state.data.filter(function (t) {
+        if (cat && t.category !== cat) return false;
+        if (pr  && (!t.pricing || t.pricing.toLowerCase() !== pr.toLowerCase())) return false;
+        if (q) {
+          var haystack = [t.aiName, t.category, t.primaryFunction, t.keywords, t.pricing]
+            .filter(Boolean).join(' ').toLowerCase();
+          if (haystack.indexOf(q) === -1) return false;
+        }
+        return true;
+      });
+
+      if (state.sortCol) {
+        var col = state.sortCol;
+        var dir = state.sortDir === 'asc' ? 1 : -1;
+        state.filtered.sort(function (a, b) {
+          var av = a[col], bv = b[col];
+          if (av == null) av = '';
+          if (bv == null) bv = '';
+          if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * dir;
+          return String(av).localeCompare(String(bv)) * dir;
+        });
+      }
+
+      state.page = 1;
+      render();
+    }
+
+    /* =========================================
+       Render
+    ========================================= */
+    function render() {
+      var total   = state.filtered.length;
+      var perPage = state.perPage;
+      var pages   = Math.max(1, Math.ceil(total / perPage));
+      if (state.page > pages) state.page = pages;
+      var start   = (state.page - 1) * perPage;
+      var slice   = state.filtered.slice(start, start + perPage);
+
+      // Results count
+      rcVisible.textContent = total;
+      rcTotal.textContent   = state.data.length;
+
+      // Table body
+      if (slice.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="13" class="no-results"><i class="fa-solid fa-robot" aria-hidden="true"></i>No tools match your search. Try adjusting the filters.</td></tr>';
+      } else {
+        tbody.innerHTML = slice.map(function (t, idx) {
+          return '<tr>'
+            + '<td class="col-sno">' + escHtml(String(t.sNo || start + idx + 1)) + '</td>'
+            + '<td class="col-logo">' + logoHtml(t) + '</td>'
+            + '<td class="col-name"><div class="tool-name-cell"><span>' + escHtml(t.aiName) + '</span></div></td>'
+            + '<td class="col-cat"><span class="cat-badge">' + escHtml(t.category) + '</span></td>'
+            + '<td class="col-func">' + escHtml(t.primaryFunction) + '</td>'
+            + '<td class="col-kw"><div class="kw-wrap">' + kwHtml(t.keywords) + '</div></td>'
+            + '<td class="col-web">'
+              + (t.website ? '<a href="' + escHtml(t.website) + '" target="_blank" rel="noopener noreferrer" class="link-btn"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>' + escHtml(shortUrl(t.website)) + '</a>' : '—')
+            + '</td>'
+            + '<td class="col-fp">'
+              + (t.futurepediaUrl ? '<a href="' + escHtml(t.futurepediaUrl) + '" target="_blank" rel="noopener noreferrer" class="link-btn"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>View</a>' : '—')
+            + '</td>'
+            + '<td class="col-price"><span class="price-badge ' + pricingClass(t.pricing) + '">' + escHtml(t.pricing || '—') + '</span></td>'
+            + '<td class="col-rating"><div class="rating-cell"><span class="stars">' + starsHtml(t.rating) + '</span><span class="rating-num">' + (t.rating || '—') + '</span></div></td>'
+            + '<td class="col-reviews num-cell" style="text-align:right">' + fmtNum(t.reviewCount) + '</td>'
+            + '<td class="col-bmark num-cell" style="text-align:right">' + fmtNum(t.bookmarkCount) + '</td>'
+            + '<td class="col-src">'
+              + (t.sourceCategoryPage ? '<a href="' + escHtml(t.sourceCategoryPage) + '" target="_blank" rel="noopener noreferrer" class="link-btn" style="font-size:0.72rem"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>' + escHtml(shortUrl(t.sourceCategoryPage)) + '</a>' : '—')
+            + '</td>'
+            + '</tr>';
+        }).join('');
+      }
+
+      // Pagination info
+      paginationInfo.textContent = 'Page ' + state.page + ' of ' + pages;
+
+      // Pagination buttons
+      var btnsHtml = '';
+      btnsHtml += '<button class="pg-btn" id="pg-prev" aria-label="Previous page"' + (state.page === 1 ? ' disabled' : '') + '><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>';
+      var from = Math.max(1, state.page - 2);
+      var to   = Math.min(pages, from + 4);
+      if (to - from < 4) from = Math.max(1, to - 4);
+      for (var p = from; p <= to; p++) {
+        btnsHtml += '<button class="pg-btn' + (p === state.page ? ' active' : '') + '" data-page="' + p + '">' + p + '</button>';
+      }
+      btnsHtml += '<button class="pg-btn" id="pg-next" aria-label="Next page"' + (state.page === pages ? ' disabled' : '') + '><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>';
+      paginationBtns.innerHTML = btnsHtml;
+
+      // Re-attach pagination events
+      document.getElementById('pg-prev').addEventListener('click', function () {
+        if (state.page > 1) { state.page--; render(); }
+      });
+      document.getElementById('pg-next').addEventListener('click', function () {
+        if (state.page < pages) { state.page++; render(); }
+      });
+      paginationBtns.querySelectorAll('[data-page]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          state.page = parseInt(this.getAttribute('data-page'), 10);
+          render();
+        });
+      });
+    }
+
+    /* =========================================
+       Sort header click
+    ========================================= */
+    document.querySelectorAll('th.sortable').forEach(function (th) {
+      th.addEventListener('click', function () {
+        var col = this.getAttribute('data-col');
+        if (state.sortCol === col) {
+          state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+        } else {
+          state.sortCol = col;
+          state.sortDir = 'asc';
+        }
+        // Update header classes
+        document.querySelectorAll('th.sortable').forEach(function (h) {
+          h.classList.remove('sort-asc', 'sort-desc');
+        });
+        this.classList.add(state.sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+        applyFilters();
+      });
+    });
+
+    /* =========================================
+       Filter events
+    ========================================= */
+    searchInput.addEventListener('input', function () {
+      state.search = this.value;
+      applyFilters();
+    });
+    filterCat.addEventListener('change', function () {
+      state.filterCat = this.value;
+      applyFilters();
+    });
+    filterPrice.addEventListener('change', function () {
+      state.filterPrice = this.value;
+      applyFilters();
+    });
+    resetBtn.addEventListener('click', function () {
+      searchInput.value = '';
+      filterCat.value   = '';
+      filterPrice.value = '';
+      state.search      = '';
+      state.filterCat   = '';
+      state.filterPrice = '';
+      state.sortCol     = null;
+      state.sortDir     = 'asc';
+      document.querySelectorAll('th.sortable').forEach(function (h) {
+        h.classList.remove('sort-asc', 'sort-desc');
+      });
+      applyFilters();
+    });
+    perPageSel.addEventListener('change', function () {
+      state.perPage = parseInt(this.value, 10);
+      state.page = 1;
+      render();
+    });
+
+    /* =========================================
+       Dark / Light Mode
+    ========================================= */
+    (function initTheme() {
+      var btn  = document.getElementById('theme-toggle');
+      var icon = document.getElementById('theme-icon');
+      if (!btn) return;
+      var saved = localStorage.getItem('mq-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', saved);
+      icon.className = saved === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+      btn.addEventListener('click', function () {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('mq-theme', next);
+        icon.className = next === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+      });
+    }());
+
+    /* =========================================
+       Hamburger Menu
+    ========================================= */
+    (function initHamburger() {
+      var btn  = document.getElementById('hamburger');
+      var menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function () {
+        var open = btn.classList.toggle('open');
+        menu.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          btn.classList.remove('open');
+          menu.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }());
+
+    /* =========================================
+       Back to Top
+    ========================================= */
+    (function initBackToTop() {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      window.addEventListener('scroll', function () {
+        btn.classList.toggle('visible', window.scrollY > 400);
+      }, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }());
+
+    /* =========================================
+       Init
+    ========================================= */
+    updateStats();
+    applyFilters();
+
+  }());
+  </script>
+</body>
+</html>
