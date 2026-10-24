@@ -1,1077 +1,312 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mubashir Qureshi — Portfolio</title>
-<meta name="description" content="Mubashir Qureshi — BS Data Analytics student, freelance WordPress developer, Python & web scraping engineer. Based in Islamabad / Rawalpindi, Pakistan." />
-<meta name="keywords" content="Mubashir Qureshi, Data Analytics, WordPress Developer, Python, Web Scraping, Selenium, Pakistan" />
-<meta name="author" content="Mubashir Qureshi" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<style>
-/* =============================================
-   MUBASHIR QURESHI — PORTFOLIO
-   Theme: Deep Space + Violet/Amber
-============================================= */
-:root {
-  --violet:       #8B5CF6;
-  --violet-light: #A78BFA;
-  --violet-dark:  #6D28D9;
-  --violet-glow:  rgba(139,92,246,0.22);
-  --amber:        #F59E0B;
-  --amber-light:  #FCD34D;
-  --bg-primary:   #04060F;
-  --bg-secondary: #080B1A;
-  --bg-card:      #0C0F20;
-  --bg-glass:     rgba(8,11,26,0.9);
-  --text-primary: #EEF0FF;
-  --text-secondary:#6B7594;
-  --border:       rgba(139,92,246,0.14);
-  --border-hover: rgba(139,92,246,0.4);
-  --shadow-v:     0 8px 40px rgba(139,92,246,0.2);
-  --radius:       16px;
-  --radius-sm:    10px;
-  --tr:           0.3s cubic-bezier(0.4,0,0.2,1);
-}
-[data-theme="light"] {
-  --bg-primary:   #F5F6FF;
-  --bg-secondary: #ECEEFF;
-  --bg-card:      #FFFFFF;
-  --bg-glass:     rgba(245,246,255,0.94);
-  --text-primary: #0A0B1E;
-  --text-secondary:#5B6285;
-  --border:       rgba(109,40,217,0.15);
-  --border-hover: rgba(109,40,217,0.4);
-  --shadow-v:     0 8px 40px rgba(109,40,217,0.12);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.7;overflow-x:hidden;transition:background var(--tr),color var(--tr)}
-a{color:inherit;text-decoration:none}
-ul{list-style:none}
-img{max-width:100%;display:block}
-button{cursor:pointer;border:none;background:none;font-family:inherit}
-section{padding:110px 0;position:relative;z-index:1}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:var(--bg-primary)}
-::-webkit-scrollbar-thumb{background:var(--violet-dark);border-radius:3px}
-
-/* BG */
-.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.bg-gradient{position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 15% -5%,rgba(109,40,217,.13) 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 85% 95%,rgba(245,158,11,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 60% 30%,rgba(139,92,246,.05) 0%,transparent 70%)}
-.bg-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(139,92,246,.06) 1px,transparent 1px);background-size:36px 36px}
-
-/* Layout */
-.container{max-width:1160px;margin:0 auto;padding:0 28px}
-
-/* Typography */
-.section-label{font-size:.75rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--violet);margin-bottom:10px;display:flex;align-items:center;gap:10px}
-.section-label::before{content:'';display:inline-block;width:24px;height:2px;background:var(--violet);border-radius:1px}
-.section-label.center{justify-content:center}
-.section-label.center::before{display:none}
-.section-title{font-family:'Poppins',sans-serif;font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700;line-height:1.15;color:var(--text-primary);margin-bottom:16px}
-.section-title span{color:var(--violet)}
-.section-desc{font-size:1rem;color:var(--text-secondary);max-width:560px;line-height:1.8}
-.section-header{margin-bottom:64px}
-.section-header.center{text-align:center}
-.section-header.center .section-desc{margin:0 auto}
-.divider{width:48px;height:3px;background:linear-gradient(90deg,var(--violet),var(--amber));border-radius:2px;margin:20px 0}
-.divider.center{margin:20px auto}
-.gradient-text{background:linear-gradient(135deg,#A78BFA 0%,#8B5CF6 40%,#F59E0B 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 32px;border-radius:50px;font-family:'Poppins',sans-serif;font-weight:600;font-size:.88rem;transition:all var(--tr);cursor:pointer;white-space:nowrap;border:none}
-.btn-primary{background:linear-gradient(135deg,var(--violet),var(--violet-dark));color:#fff;box-shadow:0 6px 24px rgba(139,92,246,.4)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(139,92,246,.55)}
-.btn-outline{border:1.5px solid var(--border-hover)!important;color:var(--violet-light);background:transparent}
-.btn-outline:hover{background:rgba(139,92,246,.1);transform:translateY(-2px)}
-.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:50px;font-size:.76rem;font-weight:600;background:rgba(139,92,246,.1);color:var(--violet-light);border:1px solid rgba(139,92,246,.22)}
-.badge.amber{background:rgba(245,158,11,.08);color:var(--amber);border-color:rgba(245,158,11,.22)}
-
-/* AOS */
-.aos-hidden{opacity:0}
-.aos-up{transform:translateY(36px);transition:opacity .7s ease,transform .7s ease}
-.aos-right{transform:translateX(-36px);transition:opacity .8s ease,transform .8s ease}
-.aos-left{transform:translateX(36px);transition:opacity .8s ease,transform .8s ease}
-.aos-visible{opacity:1!important;transform:none!important}
-
-/* Nav */
-#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 0;transition:all var(--tr)}
-#navbar.scrolled{background:var(--bg-glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);box-shadow:0 4px 40px rgba(0,0,0,.4);padding:14px 0}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Poppins',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
-.nav-logo .dot{color:var(--violet)}
-.nav-links{display:flex;align-items:center;gap:36px}
-.nav-links a{font-size:.86rem;font-weight:500;color:var(--text-secondary);position:relative;transition:color var(--tr)}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--violet);border-radius:1px;transition:width var(--tr)}
-.nav-links a:hover,.nav-links a.active{color:var(--text-primary)}
-.nav-links a:hover::after,.nav-links a.active::after{width:100%}
-.nav-actions{display:flex;align-items:center;gap:12px}
-#theme-toggle{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--border)!important;color:var(--text-secondary);font-size:.9rem;transition:all var(--tr);background:var(--bg-card);cursor:pointer}
-#theme-toggle:hover{color:var(--violet);border-color:var(--violet)!important;box-shadow:0 0 16px rgba(139,92,246,.3)}
-#hamburger{display:none;width:40px;height:40px;flex-direction:column;justify-content:center;gap:5px;padding:8px;cursor:pointer}
-#hamburger span{display:block;height:2px;background:var(--text-primary);border-radius:2px;transition:all var(--tr)}
-#hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-#hamburger.open span:nth-child(2){opacity:0}
-#hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--bg-glass);backdrop-filter:blur(24px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:8px 0}
-.mobile-menu.open{display:flex}
-.mobile-menu a{padding:13px 24px;font-size:.92rem;font-weight:500;color:var(--text-secondary);transition:all var(--tr);border-left:3px solid transparent}
-.mobile-menu a:hover{color:var(--violet);border-left-color:var(--violet);background:rgba(139,92,246,.06)}
-
-/* Hero */
-#hero{min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:130px 0 90px}
-.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;position:relative;z-index:1}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 18px;border-radius:50px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);font-size:.78rem;font-weight:700;color:var(--violet-light);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}
-.pulse{width:7px;height:7px;border-radius:50%;background:var(--violet);animation:pulse-glow 2s ease-in-out infinite}
-@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 rgba(139,92,246,.5);opacity:1}50%{box-shadow:0 0 0 6px rgba(139,92,246,0);opacity:.6}}
-.hero-name{font-family:'Poppins',sans-serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:800;line-height:1.05;margin-bottom:14px;letter-spacing:-1px}
-.hero-typed-wrapper{font-family:'Poppins',sans-serif;font-size:clamp(1.1rem,2.2vw,1.6rem);font-weight:500;color:var(--text-secondary);min-height:2.4rem;margin-bottom:24px}
-#typed{color:var(--violet-light);font-weight:600}
-.typed-cursor{color:var(--violet);animation:blink 1s step-end infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.hero-desc{font-size:1.02rem;color:var(--text-secondary);max-width:500px;margin-bottom:38px;line-height:1.85}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
-.hero-stats{display:flex;gap:0;flex-wrap:wrap}
-.stat-item{padding:0 28px}
-.stat-item:first-child{padding-left:0}
-.stat-number{font-family:'Poppins',sans-serif;font-size:2.1rem;font-weight:800;color:var(--violet-light);display:block;line-height:1}
-.stat-label{font-size:.76rem;color:var(--text-secondary);margin-top:5px;letter-spacing:.5px}
-.stat-divider{width:1px;background:var(--border);align-self:stretch}
-
-.hero-visual{display:flex;justify-content:center;align-items:center}
-.hero-avatar-frame{position:relative;width:340px;height:340px}
-.avatar-hex{width:280px;height:280px;background:linear-gradient(135deg,var(--bg-secondary),var(--bg-card));border:1px solid var(--border-hover);border-radius:40% 60% 70% 30%/40% 50% 60% 50%;display:flex;align-items:center;justify-content:center;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 60px rgba(139,92,246,.18),inset 0 0 40px rgba(139,92,246,.05);animation:morph 8s ease-in-out infinite}
-@keyframes morph{0%{border-radius:40% 60% 70% 30%/40% 50% 60% 50%}25%{border-radius:60% 40% 30% 70%/50% 60% 40% 50%}50%{border-radius:30% 60% 70% 40%/50% 30% 60% 40%}75%{border-radius:60% 40% 50% 60%/30% 60% 40% 60%}100%{border-radius:40% 60% 70% 30%/40% 50% 60% 50%}}
-.avatar-initials{font-family:'Poppins',sans-serif;font-size:4.5rem;font-weight:800;background:linear-gradient(135deg,var(--violet-light),var(--amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.orbit-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border-style:dashed;animation:spin-slow 20s linear infinite}
-.orbit-ring.r1{width:310px;height:310px;border-width:1px;border-color:rgba(139,92,246,.2)}
-.orbit-ring.r2{width:340px;height:340px;border-width:1px;border-color:rgba(245,158,11,.1);animation-direction:reverse;animation-duration:30s}
-@keyframes spin-slow{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.hero-chip{position:absolute;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:10px;font-size:.8rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:nowrap}
-.hero-chip i{color:var(--violet);font-size:1rem}
-.hero-chip.top-right{top:20px;right:-10px;animation:float 5s ease-in-out infinite}
-.hero-chip.bottom-left{bottom:20px;left:-10px;animation:float 5s ease-in-out infinite 1.5s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-
-/* About */
-#about{background:var(--bg-secondary)}
-.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:72px;align-items:center}
-.about-visual{position:relative}
-.about-photo{width:100%;max-width:360px;aspect-ratio:1/1.1;background:linear-gradient(145deg,var(--bg-card),var(--bg-primary));border:1px solid var(--border);border-radius:28px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:var(--shadow-v)}
-.about-photo::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--amber))}
-.about-photo-letters{font-family:'Poppins',sans-serif;font-size:7rem;font-weight:800;background:linear-gradient(135deg,var(--violet-light),var(--amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.about-yr-badge{position:absolute;bottom:-20px;right:-20px;background:linear-gradient(135deg,var(--violet),var(--violet-dark));border-radius:18px;padding:18px 22px;text-align:center;box-shadow:var(--shadow-v);font-family:'Poppins',sans-serif;font-weight:700}
-.about-yr-badge .num{font-size:2.2rem;display:block;line-height:1;color:#fff}
-.about-yr-badge .lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.75)}
-.about-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:32px 0 36px}
-.info-tile{padding:16px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-card);transition:border-color var(--tr)}
-.info-tile:hover{border-color:var(--border-hover)}
-.info-tile-icon{width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center;color:var(--violet);font-size:.95rem;margin-bottom:10px}
-.info-tile-icon.amber{background:rgba(245,158,11,.08);color:var(--amber)}
-.info-tile-label{font-size:.7rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.info-tile-value{font-size:.88rem;font-weight:600;color:var(--text-primary)}
-.about-tags{display:flex;flex-wrap:wrap;gap:8px}
-
-/* Services */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px}
-.service-card{padding:34px 28px;border-radius:var(--radius);background:var(--bg-card);border:1px solid var(--border);position:relative;overflow:hidden;transition:all var(--tr)}
-.service-bar{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--amber));transform:scaleX(0);transform-origin:left;transition:transform var(--tr)}
-.service-card:hover .service-bar{transform:scaleX(1)}
-.service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-v);border-color:var(--border-hover)}
-.service-icon{width:58px;height:58px;border-radius:16px;background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--violet);margin-bottom:22px;border:1px solid rgba(139,92,246,.18);transition:all var(--tr)}
-.service-card:hover .service-icon{background:var(--violet);color:#fff;border-color:var(--violet)}
-.service-title{font-family:'Poppins',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:12px}
-.service-body{font-size:.88rem;color:var(--text-secondary);margin-bottom:20px;line-height:1.75}
-.service-list{display:flex;flex-direction:column;gap:8px}
-.service-list-item{display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--text-secondary)}
-.service-list-item i{color:var(--violet);font-size:.7rem;flex-shrink:0}
-
-/* Skills */
-#skills{background:var(--bg-secondary)}
-.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.skill-item{margin-bottom:24px}
-.skill-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
-.skill-name{font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:9px}
-.skill-name i{color:var(--violet);width:16px}
-.skill-pct{font-size:.8rem;font-weight:700;color:var(--violet-light)}
-.skill-track{height:7px;background:rgba(139,92,246,.1);border-radius:4px;overflow:hidden}
-.skill-fill{height:100%;border-radius:4px;width:0;background:linear-gradient(90deg,var(--violet-dark),var(--violet),var(--violet-light));transition:width 1.4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(139,92,246,.45)}
-.tech-group{margin-bottom:28px}
-.tech-group-title{font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.tech-badges{display:flex;flex-wrap:wrap;gap:9px}
-.tech-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:50px;border:1px solid var(--border);font-size:.8rem;font-weight:600;background:var(--bg-card);color:var(--text-primary);transition:all var(--tr);cursor:default}
-.tech-badge:hover{border-color:var(--violet);color:var(--violet-light);background:rgba(139,92,246,.08);transform:translateY(-2px);box-shadow:0 4px 12px rgba(139,92,246,.2)}
-
-/* Projects */
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
-.project-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all var(--tr);display:flex;flex-direction:column}
-.project-card:hover{transform:translateY(-7px);box-shadow:var(--shadow-v);border-color:var(--border-hover)}
-.project-thumb{height:170px;display:flex;align-items:center;justify-content:center;font-size:3.8rem;position:relative;overflow:hidden}
-.project-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,var(--bg-card))}
-.project-body{padding:24px;flex:1;display:flex;flex-direction:column}
-.project-cat{font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--violet);margin-bottom:8px}
-.project-name{font-family:'Poppins',sans-serif;font-size:1.08rem;font-weight:700;margin-bottom:10px}
-.project-summary{font-size:.85rem;color:var(--text-secondary);line-height:1.75;margin-bottom:18px;flex:1}
-.project-tech{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
-.project-tech-tag{font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:50px;background:rgba(139,92,246,.08);color:var(--violet-light);border:1px solid rgba(139,92,246,.16)}
-.project-actions{display:flex;gap:10px}
-.proj-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;font-size:.78rem;font-weight:600;border:1px solid var(--border);color:var(--text-secondary);transition:all var(--tr);background:var(--bg-secondary)}
-.proj-btn:hover{border-color:var(--violet);color:var(--violet-light)}
-.proj-btn.primary{background:linear-gradient(135deg,var(--violet),var(--violet-dark));color:#fff;border-color:transparent}
-.proj-btn.primary:hover{opacity:.88;transform:translateY(-1px)}
-.wip-badge{display:inline-block;margin-left:8px;font-size:.6rem;background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.22);border-radius:50px;padding:2px 8px;font-weight:700;letter-spacing:1px}
-
-/* Timeline */
-#timeline{background:var(--bg-secondary)}
-.timeline-cols{display:grid;grid-template-columns:1fr 1fr;gap:60px}
-.tl-col-title{font-family:'Poppins',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:28px;display:flex;align-items:center;gap:10px}
-.tl-col-title i{color:var(--violet)}
-.timeline-list{position:relative;padding-left:28px}
-.timeline-list::before{content:'';position:absolute;left:9px;top:6px;bottom:0;width:2px;background:linear-gradient(180deg,var(--violet),rgba(139,92,246,.08))}
-.tl-item{position:relative;margin-bottom:28px}
-.tl-dot{position:absolute;left:-25px;top:6px;width:13px;height:13px;background:var(--violet);border-radius:50%;border:3px solid var(--bg-secondary);box-shadow:0 0 8px rgba(139,92,246,.7)}
-.tl-card{padding:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);transition:all var(--tr)}
-.tl-card:hover{border-color:var(--border-hover);box-shadow:var(--shadow-v)}
-.tl-period{font-size:.72rem;font-weight:700;color:var(--violet);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
-.tl-role{font-family:'Poppins',sans-serif;font-size:.98rem;font-weight:700;margin-bottom:3px}
-.tl-org{font-size:.83rem;color:var(--amber);font-weight:600;margin-bottom:10px}
-.tl-desc{font-size:.83rem;color:var(--text-secondary);line-height:1.7}
-.tl-badge{margin-top:10px}
-
-/* Contact */
-.contact-layout{display:grid;grid-template-columns:1fr 1.25fr;gap:60px;align-items:start}
-.contact-cards{display:flex;flex-direction:column;gap:14px;margin-bottom:32px}
-.contact-card{display:flex;align-items:center;gap:18px;padding:18px 20px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);transition:all var(--tr);color:inherit;text-decoration:none}
-.contact-card:hover{border-color:var(--border-hover);transform:translateX(5px)}
-.cc-icon{width:46px;height:46px;border-radius:12px;background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center;color:var(--violet);font-size:1.15rem;flex-shrink:0;transition:all var(--tr)}
-.contact-card:hover .cc-icon{background:var(--violet);color:#fff}
-.cc-lbl{font-size:.72rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
-.cc-val{font-size:.9rem;font-weight:600}
-.social-strip{display:flex;gap:10px;flex-wrap:wrap}
-.social-btn{width:44px;height:44px;border-radius:12px;border:1px solid var(--border)!important;background:var(--bg-card);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:1.05rem;transition:all var(--tr)}
-.social-btn:hover{background:var(--violet);color:#fff;border-color:var(--violet)!important;transform:translateY(-3px);box-shadow:0 8px 20px rgba(139,92,246,.35)}
-
-.form-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:38px}
-.form-card-title{font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:26px}
-.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-grp{margin-bottom:18px}
-.form-lbl{display:block;font-size:.78rem;font-weight:700;color:var(--text-secondary);margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
-.form-inp,.form-ta{width:100%;padding:12px 16px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-family:'Inter',sans-serif;font-size:.9rem;transition:all var(--tr);outline:none}
-.form-inp:focus,.form-ta:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(139,92,246,.12)}
-.form-inp.err,.form-ta.err{border-color:#EF4444}
-.form-ta{min-height:130px;resize:vertical}
-.form-err{font-size:.73rem;color:#EF4444;margin-top:4px;display:none}
-.form-err.show{display:block}
-.submit-btn{width:100%;padding:14px;border-radius:var(--radius-sm);font-family:'Poppins',sans-serif;font-weight:700;font-size:.93rem;background:linear-gradient(135deg,var(--violet),var(--violet-dark));color:#fff;border:none;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 6px 22px rgba(139,92,246,.38)}
-.submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(139,92,246,.52)}
-.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.send-error{color:#EF4444;font-size:.84rem;margin-bottom:12px}
-.success-box{text-align:center;padding:32px 20px}
-.success-box .s-icon{font-size:3rem;margin-bottom:16px}
-.success-box h4{font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:8px}
-.success-box p{color:var(--text-secondary);font-size:.9rem}
-
-/* Footer */
-footer{background:var(--bg-secondary);border-top:1px solid var(--border);padding:56px 0 32px;position:relative;z-index:1}
-.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:50px;margin-bottom:44px}
-.footer-brand{font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:12px}
-.footer-tagline{font-size:.86rem;color:var(--text-secondary);line-height:1.75;margin-bottom:22px}
-.footer-socials{display:flex;gap:10px}
-.footer-social-a{width:38px;height:38px;border-radius:10px;border:1px solid var(--border)!important;background:var(--bg-card);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:.9rem;transition:all var(--tr)}
-.footer-social-a:hover{background:var(--violet);color:#fff;border-color:var(--violet)!important}
-.footer-col-head{font-family:'Poppins',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:16px}
-.footer-link-list{display:flex;flex-direction:column;gap:9px}
-.footer-link-list a,.footer-link-list span{font-size:.85rem;color:var(--text-secondary);transition:color var(--tr)}
-.footer-link-list a:hover{color:var(--violet-light)}
-.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-copy{font-size:.82rem;color:var(--text-secondary)}
-.footer-copy span{color:var(--violet-light)}
-.footer-credit{font-size:.82rem;color:var(--text-secondary)}
-
-/* Back to top */
-#back-to-top{position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--violet),var(--violet-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:.95rem;box-shadow:0 6px 20px rgba(139,92,246,.45);z-index:999;opacity:0;transform:translateY(18px);transition:all var(--tr);pointer-events:none;cursor:pointer;border:none}
-#back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
-#back-to-top:hover{transform:translateY(-3px)}
-
-/* Responsive */
-@media(max-width:960px){
-  .hero-inner{grid-template-columns:1fr;gap:50px}
-  .hero-visual{order:-1}
-  .avatar-hex{width:220px;height:220px}
-  .hero-avatar-frame{width:270px;height:270px}
-  .orbit-ring.r1{width:250px;height:250px}
-  .orbit-ring.r2{width:270px;height:270px}
-  .about-grid{grid-template-columns:1fr}
-  .about-yr-badge{right:0;bottom:0}
-  .skills-layout{grid-template-columns:1fr}
-  .timeline-cols{grid-template-columns:1fr;gap:40px}
-  .contact-layout{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-}
-@media(max-width:720px){
-  section{padding:72px 0}
-  .nav-links{display:none}
-  #hamburger{display:flex}
-  .hero-cta .btn{padding:11px 22px;font-size:.83rem}
-  .hero-stats{gap:0}
-  .about-info-grid{grid-template-columns:1fr}
-  .form-2col{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;text-align:center}
-  .projects-grid{grid-template-columns:1fr}
-}
-@media(max-width:480px){
-  .avatar-hex{width:180px;height:180px}
-  .hero-avatar-frame{width:230px;height:230px}
-  .orbit-ring.r1{width:200px;height:200px}
-  .orbit-ring.r2{width:230px;height:230px}
-  .hero-chip{display:none}
-  .services-grid{grid-template-columns:1fr}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2ed">
+  <meta name="description" content="Mubashir Qureshi — data analytics student, web developer, and builder of practical digital products.">
+  <meta name="author" content="Mubashir Qureshi">
+  <title>Mubashir Qureshi — Developer & Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#f4f2ed;--paper-deep:#eae8e0;--ink:#202923;--ink-soft:#53615a;--green:#1d6958;--green-dark:#124b40;--mint:#b8d8ca;--orange:#d8784a;--line:rgba(32,41,35,.13);--white:#fffefa;--shadow:0 22px 60px rgba(35,48,40,.12);--ease:cubic-bezier(.2,.75,.25,1)}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    button,input,textarea{font:inherit}
+    button,a{-webkit-tap-highlight-color:transparent}
+    ::selection{background:var(--mint);color:var(--ink)}
+    .page-noise{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.18;background-image:radial-gradient(rgba(32,41,35,.2) .5px,transparent .5px);background-size:6px 6px;mask-image:linear-gradient(to bottom,black,transparent 72%)}
+    .wrap{width:min(1160px,calc(100% - 48px));margin-inline:auto}
+    .topbar{position:fixed;z-index:30;inset:0 0 auto;background:rgba(244,242,237,.84);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+    .topbar.scrolled{border-color:var(--line);background:rgba(244,242,237,.95)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-family:Manrope,sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:-.06em}
+    .brand-mark{color:var(--green)}
+    .nav-links{display:flex;align-items:center;gap:32px;color:var(--ink-soft);font-size:.85rem;font-weight:600}
+    .nav-links a{transition:color .2s}
+    .nav-links a:hover{color:var(--green)}
+    .nav-contact{padding:10px 17px;border:1px solid var(--line);border-radius:999px;color:var(--ink)!important}
+    .nav-contact:hover{background:var(--ink);color:white!important;border-color:var(--ink)}
+    .menu-toggle{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink);font-size:1.25rem}
+    .hero{min-height:760px;padding:142px 0 84px;display:flex;align-items:center;position:relative;isolation:isolate}
+    .hero::before{content:"";position:absolute;z-index:-1;width:min(52vw,700px);aspect-ratio:1;right:-4%;top:90px;border-radius:50%;background:radial-gradient(circle at 45% 40%,rgba(184,216,202,.7),rgba(184,216,202,.17) 58%,transparent 72%);filter:blur(8px)}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+    .eyebrow{display:flex;align-items:center;gap:10px;margin:0 0 23px;color:var(--green);font-size:.75rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
+    .eyebrow::before{content:"";width:32px;height:1px;background:var(--green)}
+    h1,h2,h3,p{margin-top:0}
+    .hero h1{font:800 clamp(3.5rem,7.5vw,6.9rem)/.98 Manrope,sans-serif;letter-spacing:-.085em;margin:0 0 22px;max-width:700px}
+    .hero h1 span{color:var(--green);display:block}
+    .hero-role{font-size:clamp(1.08rem,2vw,1.38rem);font-weight:600;color:var(--ink-soft);margin-bottom:20px;min-height:2rem}
+    .hero-role b{font-weight:700;color:var(--green)}
+    .hero-copy{max-width:510px;color:var(--ink-soft);font-size:1rem;line-height:1.8;margin-bottom:30px}
+    .hero-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-bottom:48px}
+    .button{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;font-size:.86rem;font-weight:700;transition:transform .25s var(--ease),box-shadow .25s,background .25s}
+    .button:hover{transform:translateY(-3px)}
+    .button-primary{background:var(--green);color:white;box-shadow:0 9px 22px rgba(29,105,88,.18)}
+    .button-primary:hover{background:var(--green-dark);box-shadow:0 13px 25px rgba(29,105,88,.24)}
+    .button-quiet{border:1px solid var(--line);background:rgba(255,254,250,.56)}
+    .button-quiet:hover{background:var(--white)}
+    .arrow{font-size:1.05rem;line-height:1}
+    .hero-meta{display:flex;align-items:center;gap:18px;color:var(--ink-soft);font-size:.79rem}
+    .availability{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:700}
+    .availability::before{content:"";width:8px;height:8px;border-radius:50%;background:#53a67b;box-shadow:0 0 0 4px rgba(83,166,123,.14)}
+    .meta-sep{width:1px;height:18px;background:var(--line)}
+    .portrait-stage{position:relative;perspective:1200px;padding:16px 36px 28px}
+    .portrait-card{position:relative;transform-style:preserve-3d;transform:rotateY(-8deg) rotateX(3deg);transition:transform .7s var(--ease);border-radius:32px;overflow:hidden;background:#ded4c5;box-shadow:0 34px 90px rgba(33,43,37,.22);aspect-ratio:.88;max-width:430px;margin:auto}
+    .portrait-stage:hover .portrait-card{transform:rotateY(0) rotateX(0) translateY(-5px)}
+    .portrait-card img{width:100%;height:100%;object-fit:cover;object-position:center 31%;transform:translateZ(1px) scale(1.015)}
+    .portrait-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(16,30,25,.43));pointer-events:none}
+    .portrait-caption{position:absolute;z-index:2;left:25px;right:25px;bottom:22px;color:white;display:flex;justify-content:space-between;align-items:end;transform:translateZ(32px)}
+    .portrait-caption strong{font:700 1.05rem Manrope,sans-serif;display:block}
+    .portrait-caption span{font-size:.75rem;opacity:.82}
+    .portrait-index{font-size:.72rem!important;letter-spacing:.15em}
+    .orbit{position:absolute;border:1px solid rgba(29,105,88,.28);border-radius:50%;pointer-events:none;transform:rotate(-27deg)}
+    .orbit-a{width:calc(100% - 10px);height:72%;left:0;top:14%;animation:orbit 22s linear infinite}
+    .orbit-b{width:calc(100% + 5px);height:79%;left:-3%;top:10%;border-color:rgba(216,120,74,.21);animation:orbit 30s linear infinite reverse}
+    .orbit-dot{position:absolute;width:12px;height:12px;background:var(--orange);border-radius:50%;right:7%;top:19%;box-shadow:0 0 0 7px rgba(216,120,74,.12)}
+    .floating-note{position:absolute;z-index:3;left:-4px;bottom:12%;padding:13px 16px;background:var(--white);border:1px solid rgba(32,41,35,.08);border-radius:16px;box-shadow:0 14px 36px rgba(32,41,35,.12);transform:translateZ(50px);animation:float 5s ease-in-out infinite}
+    .floating-note small{display:block;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+    .floating-note strong{font:800 1rem Manrope,sans-serif}
+    .floating-note .note-dot{color:var(--orange);padding-right:5px}
+    @keyframes orbit{to{transform:rotate(333deg)}}
+    @keyframes float{50%{translate:0 -9px}}
+    .section{padding:112px 0}
+    .section-tint{background:var(--paper-deep)}
+    .section-top{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:48px}
+    .kicker{margin-bottom:12px;color:var(--green);font-size:.73rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
+    .section-title{font:800 clamp(2.2rem,4.8vw,4rem)/1.05 Manrope,sans-serif;letter-spacing:-.07em;margin-bottom:12px}
+    .section-title em{font-style:normal;color:var(--green)}
+    .section-intro{max-width:470px;margin:0;color:var(--ink-soft);font-size:.96rem;line-height:1.8}
+    .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:82px;align-items:center}
+    .about-statement{padding:32px;border-left:2px solid var(--green);font:600 clamp(1.35rem,2.7vw,2rem)/1.5 Manrope,sans-serif;letter-spacing:-.04em}
+    .about-statement span{color:var(--green)}
+    .about-copy{color:var(--ink-soft);font-size:.96rem;line-height:1.9}
+    .about-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+    .fact{padding:17px 16px;background:rgba(255,254,250,.62);border:1px solid rgba(32,41,35,.08);border-radius:15px}
+    .fact b{display:block;font:700 .88rem Manrope,sans-serif;margin-bottom:4px}
+    .fact span{font-size:.76rem;color:var(--ink-soft)}
+    .work-section{padding-bottom:120px}
+    .work-tools{font-size:.78rem;color:var(--ink-soft);white-space:nowrap}
+    .project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:23px}
+    .project-card{--rx:0deg;--ry:0deg;position:relative;overflow:hidden;background:var(--white);border:1px solid rgba(32,41,35,.09);border-radius:21px;box-shadow:0 8px 25px rgba(32,41,35,.035);transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+    .project-card:hover{box-shadow:0 25px 55px rgba(32,41,35,.14);border-color:rgba(29,105,88,.22)}
+    .project-image{height:260px;overflow:hidden;background:#dfe8e1;position:relative;transform:translateZ(18px)}
+    .project-image img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+    .project-card:hover .project-image img{transform:scale(1.045)}
+    .project-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,36,29,.03),rgba(21,36,29,.15));pointer-events:none}
+    .project-art{height:260px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;perspective:700px;transform:translateZ(18px)}
+    .art-qau{background:radial-gradient(circle at 78% 17%,#c9dfd4 0 13%,transparent 13.5%),linear-gradient(135deg,#e7eee7,#c8d8ce)}
+    .art-sms{background:radial-gradient(circle at 19% 89%,#ead3c2 0 14%,transparent 14.5%),linear-gradient(135deg,#f1e7d7,#dce7e1)}
+    .mini-window{position:relative;width:75%;height:75%;background:#fffefa;border:1px solid rgba(25,54,42,.13);border-radius:13px;box-shadow:0 24px 55px rgba(36,60,47,.19);transform:rotateY(-11deg) rotateX(5deg);overflow:hidden;transition:transform .5s var(--ease)}
+    .project-card:hover .mini-window{transform:rotateY(0) rotateX(0) translateY(-5px)}
+    .mini-head{height:30px;background:#f4f5ef;border-bottom:1px solid rgba(25,54,42,.09);display:flex;align-items:center;padding:0 12px;gap:5px}
+    .mini-head i{display:block;width:6px;height:6px;border-radius:50%;background:#d87957}
+    .mini-head i:nth-child(2){background:#d6b562}.mini-head i:nth-child(3){background:#5da68b}
+    .mini-title{height:10px;width:27%;border-radius:8px;background:#c8d7cc;margin-left:12px}
+    .mini-body{display:grid;grid-template-columns:24% 1fr;height:calc(100% - 30px)}
+    .mini-sidebar{background:#f3f6f1;padding:15px 8px;display:grid;align-content:start;gap:9px}
+    .mini-sidebar i{height:5px;border-radius:5px;background:#d4dfd5}
+    .mini-sidebar i:first-child{background:#538d74;width:80%}
+    .mini-main{padding:15px 13px}
+    .mini-welcome{font:800 clamp(.55rem,1.1vw,.85rem) Manrope,sans-serif;color:#284e3d}
+    .mini-sub{width:52%;height:4px;background:#d9e1d9;border-radius:5px;margin-top:6px}
+    .mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0}
+    .mini-cards i{height:29px;border-radius:5px;background:#edf3ec;border:1px solid #e3eae2}
+    .mini-lines{height:8px;border-radius:6px;background:#e9eee8;margin:7px 0;width:90%}
+    .mini-lines.short{width:63%}
+    .mini-people{display:flex;gap:5px;margin-top:13px}
+    .mini-people i{height:20px;flex:1;border-radius:5px;background:#d8e6dc}
+    .project-content{padding:24px 25px 25px;transform:translateZ(28px)}
+    .project-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+    .project-type{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--green);font-weight:700}
+    .project-status{font-size:.66rem;font-weight:700;color:#8a6145;background:#f3e9dc;border-radius:999px;padding:5px 9px;white-space:nowrap}
+    .project-status.done{color:#276c51;background:#e4f0e5}
+    .project-title{font:800 1.25rem/1.25 Manrope,sans-serif;letter-spacing:-.04em;margin:0 0 9px}
+    .project-desc{color:var(--ink-soft);font-size:.84rem;line-height:1.75;margin:0 0 18px}
+    .tag-list{display:flex;flex-wrap:wrap;gap:7px}
+    .tag{font-size:.68rem;color:#42544a;background:#f0f1ec;border-radius:999px;padding:6px 10px;font-weight:600}
+    .project-foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;align-items:center;color:var(--ink-soft);font-size:.72rem}
+    .project-foot span:last-child{color:var(--green);font-weight:700}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .service{min-height:215px;padding:26px 24px;background:var(--white);border:1px solid rgba(32,41,35,.08);border-radius:18px;transition:transform .3s var(--ease),box-shadow .3s}
+    .service:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .service-index{font:700 .72rem Manrope,sans-serif;color:var(--orange);letter-spacing:.1em}
+    .service h3{font:800 1.1rem Manrope,sans-serif;letter-spacing:-.04em;margin:25px 0 9px}
+    .service p{font-size:.82rem;color:var(--ink-soft);line-height:1.8;margin:0}
+    .stack-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+    .stack-pill{padding:10px 15px;border:1px solid var(--line);border-radius:999px;background:rgba(255,254,250,.44);color:#46544c;font-size:.78rem;font-weight:600;transition:background .2s,color .2s,transform .2s}
+    .stack-pill:hover{background:var(--green);color:white;transform:translateY(-2px)}
+    .contact-panel{background:var(--ink);color:var(--white);border-radius:28px;padding:clamp(28px,6vw,68px);display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;position:relative;overflow:hidden}
+    .contact-panel::after{content:"";position:absolute;width:380px;height:380px;border:1px solid rgba(184,216,202,.15);border-radius:50%;right:-110px;top:-180px;box-shadow:0 0 0 30px rgba(184,216,202,.035),0 0 0 70px rgba(184,216,202,.025);pointer-events:none}
+    .contact-panel .kicker{color:#a4cfba}
+    .contact-panel h2{font:800 clamp(2.4rem,5vw,4.5rem)/1.02 Manrope,sans-serif;letter-spacing:-.07em;margin:0 0 20px;position:relative;z-index:1}
+    .contact-panel h2 span{color:#a4cfba}
+    .contact-panel .contact-copy{max-width:370px;color:rgba(255,254,250,.69);font-size:.92rem;line-height:1.8;margin-bottom:25px;position:relative;z-index:1}
+    .contact-email{display:inline-flex;align-items:center;gap:9px;color:#d8e9dd;font-weight:700;font-size:.88rem;position:relative;z-index:1}
+    .contact-form{position:relative;z-index:2}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .field{margin-bottom:14px}
+    .field label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,254,250,.64);margin-bottom:7px}
+    .field input,.field textarea{width:100%;border:1px solid rgba(255,255,255,.16);border-radius:11px;padding:13px 14px;background:rgba(255,255,255,.07);color:var(--white);outline:none;transition:border-color .2s,background .2s}
+    .field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.36)}
+    .field input:focus,.field textarea:focus{border-color:#a4cfba;background:rgba(255,255,255,.1)}
+    .field textarea{min-height:126px;resize:vertical}
+    .field input[aria-invalid="true"],.field textarea[aria-invalid="true"]{border-color:#f2a68e}
+    .form-note{font-size:.7rem;color:rgba(255,254,250,.55);margin:10px 0 0}
+    .submit{width:100%;border:0;border-radius:999px;background:#b9d9c6;color:#173d31;padding:14px 18px;font-weight:800;cursor:pointer;transition:transform .2s,background .2s}
+    .submit:hover{transform:translateY(-2px);background:#d5e9dc}
+    .form-status{min-height:24px;font-size:.78rem;color:#c8e8d4;margin:12px 0 0}
+    .honeypot{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+    footer{padding:30px 0 40px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;color:var(--ink-soft);font-size:.75rem}
+    .footer-links{display:flex;gap:17px}
+    .footer-links a:hover{color:var(--green)}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+    .reveal.visible{opacity:1;transform:none}
+    .delay-1{transition-delay:.1s}.delay-2{transition-delay:.18s}
+    @media(max-width:900px){.hero{min-height:auto;padding-top:130px}.hero-grid{gap:32px}.portrait-stage{padding-inline:18px}.about-grid{gap:42px}.contact-panel{gap:34px}.project-image,.project-art{height:225px}}
+    @media(max-width:720px){.wrap{width:min(100% - 36px,540px)}.nav{height:68px}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;padding:18px 22px 22px;background:rgba(244,242,237,.98);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:12px 4px}.nav-contact{border:0!important;padding:12px 4px}.menu-toggle{display:block}.hero{padding:116px 0 70px}.hero-grid{grid-template-columns:1fr;gap:38px}.hero h1{font-size:clamp(3.5rem,16vw,5.5rem)}.hero-copy{font-size:.94rem}.hero-actions{margin-bottom:30px}.portrait-stage{width:min(100%,420px);margin-inline:auto;padding:10px 23px 24px}.portrait-card{max-width:370px;aspect-ratio:1}.floating-note{left:0;bottom:11%}.section{padding:78px 0}.section-top{display:block;margin-bottom:30px}.section-intro{margin-top:12px}.work-tools{display:block;margin-top:14px}.about-grid{grid-template-columns:1fr;gap:20px}.about-statement{font-size:1.45rem;padding:19px 24px}.about-facts{grid-template-columns:1fr 1fr}.project-grid{grid-template-columns:1fr;gap:17px}.project-image,.project-art{height:clamp(205px,58vw,300px)}.project-content{padding:21px}.services-grid{grid-template-columns:1fr 1fr}.service{min-height:190px;padding:21px 18px}.contact-panel{grid-template-columns:1fr;gap:35px;padding:32px 24px}.footer-inner{align-items:flex-start;flex-direction:column}}
+    @media(max-width:440px){.hero-meta{flex-wrap:wrap;gap:12px}.meta-sep{display:none}.services-grid{grid-template-columns:1fr}.about-facts{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr;gap:0}.project-meta{align-items:flex-start;flex-direction:column}.project-status{align-self:flex-start}.footer-links{flex-wrap:wrap}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+    body.no-js .reveal{opacity:1;transform:none}
+  </style>
 </head>
-<body>
-
-<!-- Background Mesh -->
-<div class="bg-mesh" aria-hidden="true">
-  <div class="bg-gradient"></div>
-  <div class="bg-dots"></div>
-</div>
-
-<!-- Navbar -->
-<nav id="navbar">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">MQ<span class="dot">.</span></a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#timeline">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button id="theme-toggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
-        <button id="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+<body class="no-js">
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="topbar" id="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Mubashir Qureshi home">MUBASHIR<span class="brand-mark">.</span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#about">About</a><a href="#work">Projects</a><a href="#services">What I do</a><a href="#contact" class="nav-contact">Let's talk <span class="arrow">↗</span></a>
       </div>
-    </div>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="#about" onclick="closeMobile()">About</a>
-      <a href="#services" onclick="closeMobile()">Services</a>
-      <a href="#skills" onclick="closeMobile()">Skills</a>
-      <a href="#projects" onclick="closeMobile()">Projects</a>
-      <a href="#timeline" onclick="closeMobile()">Experience</a>
-      <a href="#contact" onclick="closeMobile()">Contact</a>
-    </div>
-  </div>
-</nav>
+    </nav>
+  </header>
 
-<!-- Hero -->
-<section id="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-content aos-hidden aos-right">
-        <div class="hero-eyebrow"><span class="pulse"></span>Available for Freelance</div>
-        <h1 class="hero-name gradient-text">Mubashir<br>Qureshi</h1>
-        <div class="hero-typed-wrapper" aria-live="polite">
-          <span id="typed"></span><span class="typed-cursor" aria-hidden="true">|</span>
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-text reveal">
+          <p class="eyebrow">Developer · Data &amp; digital products</p>
+          <h1>Mubashir <span>Qureshi.</span></h1>
+          <p class="hero-role">I build <b id="typed-role">useful digital tools</b><span aria-hidden="true">.</span></p>
+          <p class="hero-copy">From thoughtful websites to data workflows and full-stack systems, I turn practical ideas into clear, dependable digital experiences.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#work">Explore selected work <span class="arrow">↘</span></a><a class="button button-quiet" href="#contact">Start a conversation <span class="arrow">↗</span></a></div>
+          <div class="hero-meta"><span class="availability">Available for select projects</span><span class="meta-sep" aria-hidden="true"></span><span>Islamabad / Rawalpindi, Pakistan</span></div>
         </div>
-        <p class="hero-desc">Building production-grade Python scrapers, interactive Excel dashboards, full-stack systems, and polished WordPress sites — turning data and code into real results.</p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-briefcase"></i>View My Work</a>
-          <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-paper-plane"></i>Hire Me</a>
-        </div>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-number" data-target="2" data-suffix="+">0+</span>
-            <div class="stat-label">Years Coding</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number" data-target="4">0</span>
-            <div class="stat-label">Projects</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number" data-target="1554" data-suffix="+">0+</span>
-            <div class="stat-label">Records Scraped</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <span class="stat-number" data-target="100" data-suffix="%">0%</span>
-            <div class="stat-label">Commitment</div>
-          </div>
+        <div class="portrait-stage reveal delay-1" aria-label="Portrait of Mubashir Qureshi">
+          <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><span class="orbit-dot" aria-hidden="true"></span>
+          <div class="portrait-card"><img src="assets/mubashir-portrait.png" alt="Mubashir Qureshi in a dark suit" fetchpriority="high"><div class="portrait-caption"><div><strong>Mubashir Qureshi</strong><span>Developer &amp; data enthusiast</span></div><span class="portrait-index">01 — 05</span></div></div>
+          <div class="floating-note"><small><span class="note-dot">●</span>Current focus</small><strong>Build · Learn · Improve</strong></div>
         </div>
       </div>
-      <div class="hero-visual aos-hidden aos-left">
-        <div class="hero-avatar-frame" aria-hidden="true">
-          <div class="orbit-ring r1"></div>
-          <div class="orbit-ring r2"></div>
-          <div class="avatar-hex">
-            <span class="avatar-initials">MQ</span>
-          </div>
-          <div class="hero-chip top-right"><i class="fa-brands fa-python"></i><span>Python · Selenium</span></div>
-          <div class="hero-chip bottom-left"><i class="fa-brands fa-wordpress"></i><span>WordPress Expert</span></div>
+    </section>
+
+    <section class="section section-tint" id="about">
+      <div class="wrap about-grid">
+        <div class="about-statement reveal">I like making complex work feel <span>simple, useful, and human.</span></div>
+        <div class="reveal delay-1"><p class="kicker">A little about me</p><p class="about-copy">I'm a BS Data Analytics student at PMAS Arid Agriculture University and a freelance WordPress developer. My work sits at the meeting point of data, thoughtful design, and software that helps people get real work done.</p><p class="about-copy">I enjoy building from the details up: collecting and structuring data, shaping clear interfaces, and wiring applications to real APIs. I care about honest progress, dependable fundamentals, and making the finished thing feel considered.</p>
+          <div class="about-facts"><div class="fact"><b>Based in</b><span>Islamabad / Rawalpindi</span></div><div class="fact"><b>Studying</b><span>BS Data Analytics · UAAR</span></div><div class="fact"><b>Working with</b><span>Web, data &amp; full-stack apps</span></div></div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- About -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-visual aos-hidden aos-right">
-        <div class="about-photo" role="img" aria-label="Mubashir Qureshi">
-          <span class="about-photo-letters" aria-hidden="true">MQ</span>
-           <!-- <img src="my-photo.png" style="width:100%;height:100%;display:cover;repeat:no-repeat;" /> -->
-        </div>
-        <div class="about-yr-badge">
-          <span class="num">2+</span><span class="lbl">Years Exp.</span>
+    <section class="section work-section" id="work">
+      <div class="wrap">
+        <div class="section-top reveal"><div><p class="kicker">Selected work</p><h2 class="section-title">Projects with a <em>purpose.</em></h2></div><div class="work-tools">A selection of client work and active builds</div></div>
+        <div class="project-grid">
+          <article class="project-card reveal" data-tilt>
+            <div class="project-image"><img src="assets/ai-tools-dashboard.png" alt="AI tools analytics dashboard project artwork" loading="lazy"></div>
+            <div class="project-content"><div class="project-meta"><span class="project-type">Data collection · Analytics</span><span class="project-status done">Completed build</span></div><h3 class="project-title">AI Tools Data Scraper &amp; Analytics</h3><p class="project-desc">A Python and Selenium workflow collected more than 1,500 AI tools across 22 fields, then shaped the dataset into an interactive Excel dashboard with KPI cards, filters, and category insights.</p><div class="tag-list"><span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">Excel</span><span class="tag">Data analysis</span></div><div class="project-foot"><span>Automation · Business intelligence</span><span>01 / 05</span></div></div>
+          </article>
+          <article class="project-card reveal delay-1" data-tilt>
+            <div class="project-image"><img src="assets/cyber-elements.png" alt="Cyber Elements IT services website project preview" loading="lazy"></div>
+            <div class="project-content"><div class="project-meta"><span class="project-type">WordPress · IT &amp; BPO</span><span class="project-status done">Client project</span></div><h3 class="project-title">Cyber Elements</h3><p class="project-desc">A polished web presence for a UK-based IT services and global BPO company, presenting infrastructure, security, cloud, and application-development services with a consultation contact form.</p><div class="tag-list"><span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">Responsive design</span><span class="tag">Contact form</span></div><div class="project-foot"><span>Client website · UK</span><span>02 / 05</span></div></div>
+          </article>
+          <article class="project-card reveal" data-tilt>
+            <div class="project-image"><img src="assets/revenuecycle-pros.png" alt="RevenueCycle Pros medical billing website project preview" loading="lazy"></div>
+            <div class="project-content"><div class="project-meta"><span class="project-type">WordPress · Healthcare</span><span class="project-status done">Client project</span></div><h3 class="project-title">RevenueCycle Pros LLC</h3><p class="project-desc">A clear, service-led website for a US medical billing company, organizing billing, credentialing, and denial-management offerings for healthcare providers.</p><div class="tag-list"><span class="tag">WordPress</span><span class="tag">Elementor</span><span class="tag">Healthcare</span><span class="tag">Responsive design</span></div><div class="project-foot"><span>Client website · United States</span><span>03 / 05</span></div></div>
+          </article>
+          <article class="project-card reveal delay-1" data-tilt>
+            <div class="project-art art-qau" aria-label="Abstract preview of an alumni administration dashboard"><div class="mini-window"><div class="mini-head"><i></i><i></i><i></i><span class="mini-title"></span></div><div class="mini-body"><div class="mini-sidebar"><i></i><i></i><i></i><i></i><i></i></div><div class="mini-main"><div class="mini-welcome">Alumni dashboard</div><div class="mini-sub"></div><div class="mini-cards"><i></i><i></i><i></i></div><div class="mini-lines"></div><div class="mini-lines short"></div><div class="mini-people"><i></i><i></i><i></i></div></div></div></div></div>
+            <div class="project-content"><div class="project-meta"><span class="project-type">Angular · .NET Core</span><span class="project-status">API integration next</span></div><h3 class="project-title">QAU Alumni Portal — Admin</h3><p class="project-desc">An admin panel for alumni requests, leader messages, testimonials, and dashboard operations. The existing UI is in place; the next focus is wiring the leader-message flows to the admin API.</p><div class="tag-list"><span class="tag">Angular</span><span class="tag">.NET Core API</span><span class="tag">Admin tools</span><span class="tag">SweetAlert</span></div><div class="project-foot"><span>Alumni management · Admin panel</span><span>04 / 05</span></div></div>
+          </article>
+          <article class="project-card reveal" data-tilt>
+            <div class="project-art art-sms" aria-label="Abstract preview of a school management dashboard"><div class="mini-window"><div class="mini-head"><i></i><i></i><i></i><span class="mini-title"></span></div><div class="mini-body"><div class="mini-sidebar"><i></i><i></i><i></i><i></i><i></i></div><div class="mini-main"><div class="mini-welcome">School overview</div><div class="mini-sub"></div><div class="mini-cards"><i></i><i></i><i></i></div><div class="mini-lines"></div><div class="mini-lines short"></div><div class="mini-people"><i></i><i></i><i></i></div></div></div></div></div>
+            <div class="project-content"><div class="project-meta"><span class="project-type">Angular 17 · .NET</span><span class="project-status">Active build</span></div><h3 class="project-title">School Management System</h3><p class="project-desc">A module-based school platform for admin and parent workflows. Current work is connecting Angular forms and real backend data, including cascading subject selections and student-profile handling.</p><div class="tag-list"><span class="tag">Angular 17</span><span class="tag">.NET API</span><span class="tag">Bootstrap 5</span><span class="tag">MySQL</span></div><div class="project-foot"><span>Education · Full-stack application</span><span>05 / 05</span></div></div>
+          </article>
         </div>
       </div>
-      <div class="aos-hidden aos-left">
-        <p class="section-label">Get to Know Me</p>
-        <h2 class="section-title">Passionate About <span>Data</span> &amp; <span>Code</span></h2>
-        <div class="divider"></div>
-        <p style="color:var(--text-secondary);line-height:1.85;margin-bottom:16px">I'm <strong style="color:var(--text-primary)">Mubashir Qureshi</strong> — a BS Data Analytics student at <em style="color:var(--amber)">PMAS Arid Agriculture University (UAAR)</em>, Rawalpindi, and a freelance WordPress developer since 2023. Based in Islamabad / Rawalpindi, Pakistan 🇵🇰.</p>
-        <p style="color:var(--text-secondary);line-height:1.85;margin-bottom:32px">My core strengths are Python, OOP, and web scraping. I built a production-style scraper that pulled ~1,554 AI tools across 22 data points from Futurepedia.io using Selenium — with fallback logic for changing page structures — then turned that data into an interactive Excel dashboard with PivotTables, XLOOKUP, and KPI tracking. What I list, I can deliver.</p>
-        <div class="about-info-grid">
-          <div class="info-tile">
-            <div class="info-tile-icon"><i class="fa-solid fa-map-pin"></i></div>
-            <div class="info-tile-label">Location</div>
-            <div class="info-tile-value">Islamabad / Rawalpindi 🇵🇰</div>
-          </div>
-          <div class="info-tile">
-            <div class="info-tile-icon amber"><i class="fa-solid fa-graduation-cap"></i></div>
-            <div class="info-tile-label">Education</div>
-            <div class="info-tile-value">BS Data Analytics, UAAR</div>
-          </div>
-          <div class="info-tile">
-            <div class="info-tile-icon"><i class="fa-solid fa-briefcase"></i></div>
-            <div class="info-tile-label">Freelancing</div>
-            <div class="info-tile-value">WordPress Dev Since 2023</div>
-          </div>
-          <div class="info-tile">
-            <div class="info-tile-icon amber"><i class="fa-solid fa-language"></i></div>
-            <div class="info-tile-label">Languages</div>
-            <div class="info-tile-value">English · Urdu</div>
-          </div>
+    </section>
+
+    <section class="section section-tint" id="services">
+      <div class="wrap">
+        <div class="section-top reveal"><div><p class="kicker">How I can help</p><h2 class="section-title">Useful work, <em>well made.</em></h2></div><p class="section-intro">A practical blend of development and analytics, shaped around the actual problem—not a template solution.</p></div>
+        <div class="services-grid">
+          <article class="service reveal"><span class="service-index">01 / DATA</span><h3>Data collection &amp; insight</h3><p>Build resilient scraping and automation workflows, clean structured datasets, and turn findings into readable reporting.</p></article>
+          <article class="service reveal delay-1"><span class="service-index">02 / WEB</span><h3>WordPress websites</h3><p>Create responsive, professional websites for businesses, with a clear service story and practical contact journeys.</p></article>
+          <article class="service reveal delay-2"><span class="service-index">03 / APPS</span><h3>Full-stack applications</h3><p>Develop Angular interfaces connected to .NET APIs, with real forms, data flows, and maintainable modules.</p></article>
         </div>
-        <div class="about-tags">
-          <span class="badge"><i class="fa-brands fa-python"></i>Python & OOP</span>
-          <span class="badge"><i class="fa-solid fa-spider"></i>Web Scraping</span>
-          <span class="badge amber"><i class="fa-brands fa-wordpress"></i>WordPress</span>
-          <span class="badge"><i class="fa-solid fa-file-excel"></i>Excel & BI</span>
-          <span class="badge amber"><i class="fa-solid fa-database"></i>SQL</span>
-        </div>
+        <div class="stack-row reveal" aria-label="Technologies"><span class="stack-pill">Python</span><span class="stack-pill">Selenium</span><span class="stack-pill">Pandas</span><span class="stack-pill">Excel</span><span class="stack-pill">WordPress</span><span class="stack-pill">Angular 17</span><span class="stack-pill">.NET Core</span><span class="stack-pill">SQL</span><span class="stack-pill">HTML · CSS · JavaScript</span></div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- Services -->
-<section id="services">
-  <div class="container">
-    <div class="section-header center aos-hidden aos-up">
-      <p class="section-label center">What I Offer</p>
-      <h2 class="section-title">My <span>Services</span></h2>
-      <div class="divider center"></div>
-      <p class="section-desc">Practical, production-ready solutions — from data collection to full-stack web delivery.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card aos-hidden aos-up" style="transition-delay:0ms">
-        <div class="service-bar"></div>
-        <div class="service-icon"><i class="fa-solid fa-spider"></i></div>
-        <h3 class="service-title">Web Scraping & Data Engineering</h3>
-        <p class="service-body">Production-grade Selenium scrapers that handle dynamic pages, pagination, and changing structures — delivering clean, structured data at scale.</p>
-        <div class="service-list">
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Selenium automation for dynamic sites</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Fallback logic & robust error handling</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>1,554 AI tools scraped across 22 data fields</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Data cleaning with Pandas & Regex</span></div>
-        </div>
-      </div>
-      <div class="service-card aos-hidden aos-up" style="transition-delay:70ms">
-        <div class="service-bar"></div>
-        <div class="service-icon"><i class="fa-solid fa-chart-bar"></i></div>
-        <h3 class="service-title">Excel Dashboards & Business Intelligence</h3>
-        <p class="service-body">Interactive Excel dashboards with KPI tracking, dynamic lookups, and automated reporting — real insights without an external BI tool.</p>
-        <div class="service-list">
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>PivotTables & XLOOKUP automation</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Dynamic KPI charts & slicers</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Conditional formatting & trend analysis</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Automated reporting pipelines</span></div>
-        </div>
-      </div>
-      <div class="service-card aos-hidden aos-up" style="transition-delay:140ms">
-        <div class="service-bar"></div>
-        <div class="service-icon"><i class="fa-brands fa-wordpress"></i></div>
-        <h3 class="service-title">WordPress Development</h3>
-        <p class="service-body">End-to-end WordPress projects for real clients — custom themes, WooCommerce, performance optimization, and ongoing maintenance.</p>
-        <div class="service-list">
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Custom theme builds from scratch</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Plugin configuration & WooCommerce</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Performance optimization & SEO</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Live client sites, start to finish</span></div>
-        </div>
-      </div>
-      <div class="service-card aos-hidden aos-up" style="transition-delay:210ms">
-        <div class="service-bar"></div>
-        <div class="service-icon"><i class="fa-solid fa-code"></i></div>
-        <h3 class="service-title">Full-Stack Development</h3>
-        <p class="service-body">Building a complete School Management System — Angular 17 SPA, .NET Core C# REST API, and MySQL database — expanding into modern full-stack engineering.</p>
-        <div class="service-list">
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>Angular 17 single-page applications</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>.NET Core C# REST API design</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>MySQL schema & relational queries</span></div>
-          <div class="service-list-item"><i class="fa-solid fa-circle-check"></i><span>HTML5 / CSS3 / JavaScript</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <section class="section" id="contact">
+      <div class="wrap"><div class="contact-panel reveal">
+        <div><p class="kicker">Have something in mind?</p><h2>Let's make it <span>real.</span></h2><p class="contact-copy">Share a little about your project or the problem you’re solving. I’ll get back to you and we can figure out a useful next step.</p><a class="contact-email" href="mailto:25-arid-3498@student.uaar.edu.pk">✉ &nbsp;25-arid-3498@student.uaar.edu.pk <span class="arrow">↗</span></a></div>
+        <form class="contact-form" id="contact-form">
+          <div class="honeypot" aria-hidden="true"><label for="company-website">Leave this field empty</label><input type="text" id="company-website" name="company-website" tabindex="-1" autocomplete="off"></div>
+          <div class="form-grid"><div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" placeholder="Name" autocomplete="name" required minlength="2" maxlength="80"></div><div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required maxlength="120"></div></div>
+          <div class="field"><label for="subject">What’s this about?</label><input id="subject" name="subject" type="text" placeholder="Project, collaboration, or a question" required minlength="3" maxlength="120"></div>
+          <div class="field"><label for="message">A few details</label><textarea id="message" name="message" placeholder="Tell me what you’re looking to build…" required minlength="10" maxlength="3000"></textarea></div>
+          <button class="submit" type="submit">Prepare message <span aria-hidden="true">↗</span></button>
+          <p class="form-note">This form opens a pre-filled message in your email app. Review it and press Send there.</p><p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div></div>
+    </section>
+  </main>
 
-<!-- Skills -->
-<section id="skills">
-  <div class="container">
-    <div class="section-header aos-hidden aos-up">
-      <p class="section-label">Technical Proficiency</p>
-      <h2 class="section-title">Skills &amp; <span>Tech Stack</span></h2>
-      <div class="divider"></div>
-      <p class="section-desc">Technologies I build with — assessed honestly based on real project experience.</p>
-    </div>
-    <div class="skills-layout">
-      <div class="aos-hidden aos-right">
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-python" aria-hidden="true"></i>Python & OOP</span>
-            <span class="skill-pct">88%</span>
-          </div>
-          <div class="skill-track"><div class="skill-fill" data-pct="88"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-solid fa-spider" aria-hidden="true"></i>Selenium & Scraping</span>
-            <span class="skill-pct">83%</span>
-          </div>
-          <div class="skill-track"><div class="skill-fill" data-pct="83"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-wordpress" aria-hidden="true"></i>WordPress</span>
-            <span class="skill-pct">92%</span>
-          </div>
-          <div class="skill-track"><div class="skill-fill" data-pct="92"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-html5" aria-hidden="true"></i>HTML5 / CSS3</span>
-            <span class="skill-pct">87%</span>
-          </div>
-          <div class="skill-track"><div class="skill-fill" data-pct="87"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-solid fa-file-excel" aria-hidden="true"></i>Excel & Data Analysis</span>
-            <span class="skill-pct">80%</span>
-          </div>
-          <div class="skill-track"><div class="skill-fill" data-pct="80"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-js" aria-hidden="true"></i>JavaScript</span>
-            <span class="skill-pct">62%</span>
-          </div>
-          <div class="skill-track"><div class="skill-fill" data-pct="62"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-solid fa-database" aria-hidden="true"></i>SQL</span>
-            <span class="skill-pct">58%</span>
-          </div>
-          <div class="skill-track"><div class="skill-fill" data-pct="58"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-header">
-            <span class="skill-name"><i class="fa-brands fa-angular" aria-hidden="true"></i>Angular 17</span>
-            <span class="skill-pct">40%</span>
-          </div>
-          <div class="skill-track"><div class="skill-fill" data-pct="40"></div></div>
-        </div>
-      </div>
-      <div class="aos-hidden aos-left">
-        <div class="tech-group">
-          <div class="tech-group-title">Languages</div>
-          <div class="tech-badges">
-            <span class="tech-badge"><i class="fa-brands fa-python"></i> Python</span>
-            <span class="tech-badge"><i class="fa-solid fa-database"></i> SQL</span>
-            <span class="tech-badge"><i class="fa-brands fa-html5"></i> HTML5</span>
-            <span class="tech-badge"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
-            <span class="tech-badge"><i class="fa-brands fa-js"></i> JavaScript</span>
-            <span class="tech-badge"><i class="fa-solid fa-code"></i> C#</span>
-          </div>
-        </div>
-        <div class="tech-group">
-          <div class="tech-group-title">Data & Scraping</div>
-          <div class="tech-badges">
-            <span class="tech-badge"><i class="fa-brands fa-python"></i> Pandas</span>
-            <span class="tech-badge"><i class="fa-solid fa-spider"></i> Selenium</span>
-            <span class="tech-badge"><i class="fa-solid fa-spider"></i> BeautifulSoup</span>
-            <span class="tech-badge"><i class="fa-solid fa-file-excel"></i> Excel</span>
-            <span class="tech-badge"><i class="fa-solid fa-table"></i> PivotTables</span>
-          </div>
-        </div>
-        <div class="tech-group">
-          <div class="tech-group-title">Platforms & Tools</div>
-          <div class="tech-badges">
-            <span class="tech-badge"><i class="fa-brands fa-wordpress"></i> WordPress</span>
-            <span class="tech-badge"><i class="fa-brands fa-angular"></i> Angular 17</span>
-            <span class="tech-badge"><i class="fa-solid fa-server"></i> .NET Core</span>
-            <span class="tech-badge"><i class="fa-brands fa-git-alt"></i> Git</span>
-            <span class="tech-badge"><i class="fa-brands fa-github"></i> GitHub</span>
-            <span class="tech-badge"><i class="fa-brands fa-canva"></i> Canva Pro</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <footer><div class="wrap footer-inner"><span>© <span id="year">2026</span> Mubashir Qureshi. Built with care.</span><div class="footer-links"><a href="https://www.linkedin.com/in/mubashir-qureshi-0678192a7/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://github.com/mubashir-qureshii" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#home">Back to top ↑</a></div></div></footer>
 
-<!-- Projects -->
-<section id="projects">
-  <div class="container">
-    <div class="section-header center aos-hidden aos-up">
-      <p class="section-label center">Portfolio</p>
-      <h2 class="section-title">Featured <span>Projects</span></h2>
-      <div class="divider center"></div>
-      <p class="section-desc">Real work solving real problems — not toy demos.</p>
-    </div>
-    <div class="projects-grid">
-      <div class="project-card aos-hidden aos-up" style="transition-delay:0ms">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#0A1A0F,#0D2A18)">🕷️</div>
-        <div class="project-body">
-          <div class="project-cat">Web Scraping · Python · Automation</div>
-          <h3 class="project-name">Futurepedia AI Tools Scraper</h3>
-          <p class="project-summary">Production-grade Selenium scraper that extracted ~1,554 AI tools across 22 data points from Futurepedia.io — names, categories, pricing, ratings — with fallback logic for dynamic page structures.</p>
-          <div class="project-tech">
-            <span class="project-tech-tag">Python</span><span class="project-tech-tag">Selenium</span><span class="project-tech-tag">Pandas</span><span class="project-tech-tag">Regex</span><span class="project-tech-tag">Data Cleaning</span>
-          </div>
-          <div class="project-actions">
-            <a href="https://github.com/mubashir-qureshii" target="_blank" rel="noopener noreferrer" class="proj-btn primary"><i class="fa-brands fa-github"></i>GitHub</a>
-          </div>
-        </div>
-      </div>
-      <div class="project-card aos-hidden aos-up" style="transition-delay:70ms">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#0A0F22,#0D1A3A)">📊</div>
-        <div class="project-body">
-          <div class="project-cat">Data Analytics · Excel BI</div>
-          <h3 class="project-name">AI Tools Interactive Dashboard</h3>
-          <p class="project-summary">Transformed the raw scraped dataset into a fully interactive Excel dashboard — PivotTables, dynamic XLOOKUP lookups, KPI tracking cards, category slicers, and trend charts, all in native Excel.</p>
-          <div class="project-tech">
-            <span class="project-tech-tag">Excel</span><span class="project-tech-tag">PivotTables</span><span class="project-tech-tag">XLOOKUP</span><span class="project-tech-tag">KPI Charts</span><span class="project-tech-tag">Data Visualization</span>
-          </div>
-          <div class="project-actions">
-            <a href="https://github.com/mubashir-qureshii" target="_blank" rel="noopener noreferrer" class="proj-btn primary"><i class="fa-brands fa-github"></i>GitHub</a>
-          </div>
-        </div>
-      </div>
-      <div class="project-card aos-hidden aos-up" style="transition-delay:140ms">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#120A22,#1E0A3A)">🏫</div>
-        <div class="project-body">
-          <div class="project-cat">Full-Stack · Angular · .NET Core</div>
-          <h3 class="project-name">School Management System <span class="wip-badge">IN PROGRESS</span></h3>
-          <p class="project-summary">Full-stack system in active development: Angular 17 SPA frontend, MySQL database, and a .NET Core C# REST API handling business logic for students, teachers, attendance, and grades.</p>
-          <div class="project-tech">
-            <span class="project-tech-tag">Angular 17</span><span class="project-tech-tag">MySQL</span><span class="project-tech-tag">.NET Core</span><span class="project-tech-tag">C#</span><span class="project-tech-tag">REST API</span>
-          </div>
-          <div class="project-actions">
-            <a href="https://github.com/mubashir-qureshii" target="_blank" rel="noopener noreferrer" class="proj-btn primary"><i class="fa-brands fa-github"></i>GitHub</a>
-          </div>
-        </div>
-      </div>
-      <div class="project-card aos-hidden aos-up" style="transition-delay:210ms">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#1A100A,#2A1A0A)">🌐</div>
-        <div class="project-body">
-          <div class="project-cat">WordPress · Freelance · WooCommerce</div>
-          <h3 class="project-name">Client WordPress Projects</h3>
-          <p class="project-summary">End-to-end WordPress websites built for paying clients since 2023 — from scoping and custom theme development through plugin setup, performance tuning, SEO, and ongoing maintenance.</p>
-          <div class="project-tech">
-            <span class="project-tech-tag">WordPress</span><span class="project-tech-tag">WooCommerce</span><span class="project-tech-tag">Custom Themes</span><span class="project-tech-tag">PHP</span><span class="project-tech-tag">SEO</span>
-          </div>
-          <div class="project-actions">
-            <a href="https://github.com/mubashir-qureshii" target="_blank" rel="noopener noreferrer" class="proj-btn primary"><i class="fa-brands fa-github"></i>GitHub</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Timeline -->
-<section id="timeline">
-  <div class="container">
-    <div class="section-header center aos-hidden aos-up">
-      <p class="section-label center">My Journey</p>
-      <h2 class="section-title">Experience &amp; <span>Education</span></h2>
-      <div class="divider center"></div>
-    </div>
-    <div class="timeline-cols">
-      <div class="aos-hidden aos-right">
-        <h3 class="tl-col-title"><i class="fa-solid fa-briefcase"></i>Work Experience</h3>
-        <div class="timeline-list">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-card">
-              <div class="tl-period">2023 — Present</div>
-              <div class="tl-role">Freelance WordPress Developer</div>
-              <div class="tl-org">Self-Employed · Freelance Clients</div>
-              <p class="tl-desc">Managing end-to-end WordPress projects for paying clients — custom themes, WooCommerce, plugin configuration, performance optimization, SEO, and ongoing maintenance. Real clients, real deliverables.</p>
-              <div class="tl-badge"><span class="badge"><i class="fa-solid fa-circle-dot"></i>Currently Active</span></div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-card">
-              <div class="tl-period">2023 — Present</div>
-              <div class="tl-role">Python Developer & Data Engineer</div>
-              <div class="tl-org">Self-Directed Projects</div>
-              <p class="tl-desc">Building production Python tools: Selenium scrapers for large-scale data collection (1,554+ records, 22 data fields), Pandas-based data pipelines, and interactive Excel BI dashboards with PivotTables and KPI tracking.</p>
-              <div class="tl-badge"><span class="badge"><i class="fa-solid fa-circle-dot"></i>Active Builder</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="aos-hidden aos-left">
-        <h3 class="tl-col-title"><i class="fa-solid fa-graduation-cap"></i>Education</h3>
-        <div class="timeline-list">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-card">
-              <div class="tl-period">2025 — 2029 (Expected)</div>
-              <div class="tl-role">BS Data Analytics</div>
-              <div class="tl-org">PMAS Arid Agriculture University (UAAR), Rawalpindi</div>
-              <p class="tl-desc">Bachelor's degree in data science, statistical analysis, database management, Python, SQL, and data visualization — building toward a career in data analytics, full-stack engineering, and AI/ML.</p>
-              <div class="tl-badge"><span class="badge"><i class="fa-solid fa-circle-dot"></i>Currently Enrolled</span></div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-card">
-              <div class="tl-period">Jun 2023 — Sep 2023</div>
-              <div class="tl-role">Web Development Certificate</div>
-              <div class="tl-org">TEVTA Institute</div>
-              <p class="tl-desc">Intensive 3-month program covering HTML5, CSS3, JavaScript fundamentals, responsive design, and WordPress CMS development with multiple hands-on projects.</p>
-              <div class="tl-badge"><span class="badge amber"><i class="fa-solid fa-check"></i>Completed</span></div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-card">
-              <div class="tl-period">2023 — Present</div>
-              <div class="tl-role">Full-Stack & Data Engineering</div>
-              <div class="tl-org">Online Resources · Hands-On Projects</div>
-              <p class="tl-desc">Expanding into Angular 17, .NET Core C#, MySQL, and SQL through the School Management System project — from basic queries to analytics with real datasets.</p>
-              <div class="tl-badge"><span class="badge amber"><i class="fa-solid fa-circle-dot"></i>In Progress</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact -->
-<section id="contact">
-  <div class="container">
-    <div class="section-header center aos-hidden aos-up">
-      <p class="section-label center">Get In Touch</p>
-      <h2 class="section-title">Let's <span>Work Together</span></h2>
-      <div class="divider center"></div>
-      <p class="section-desc">Have a project in mind? Send a message and I'll get back within 24 hours.</p>
-    </div>
-    <div class="contact-layout">
-      <div class="aos-hidden aos-right">
-        <div class="contact-cards">
-          <a href="mailto:25-arid-3498@student.uaar.edu.pk" class="contact-card">
-            <div class="cc-icon"><i class="fa-solid fa-envelope"></i></div>
-            <div><div class="cc-lbl">Email</div><div class="cc-val">25-arid-3498@student.uaar.edu.pk</div></div>
-          </a>
-          <a href="tel:+923480622951" class="contact-card">
-            <div class="cc-icon"><i class="fa-solid fa-phone"></i></div>
-            <div><div class="cc-lbl">Phone / WhatsApp</div><div class="cc-val">+92 348 0622951</div></div>
-          </a>
-          <div class="contact-card">
-            <div class="cc-icon"><i class="fa-solid fa-location-dot"></i></div>
-            <div><div class="cc-lbl">Location</div><div class="cc-val">Islamabad / Rawalpindi, Pakistan 🇵🇰</div></div>
-          </div>
-        </div>
-        <p style="font-size:.78rem;color:var(--text-secondary);margin-bottom:14px;font-weight:700;text-transform:uppercase;letter-spacing:2px">Connect Online</p>
-        <div class="social-strip">
-          <a href="https://www.linkedin.com/in/mubashir-qureshi-0678192a7/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://github.com/mubashir-qureshii" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="mailto:25-arid-3498@student.uaar.edu.pk" class="social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-          <a href="tel:+923480622951" class="social-btn" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
-        </div>
-      </div>
-      <div class="aos-hidden aos-left">
-        <div class="form-card">
-          <h3 class="form-card-title">Send a Message</h3>
-          <div id="success-box" class="success-box" style="display:none">
-            <div class="s-icon">✅</div>
-            <h4>Message Sent!</h4>
-            <p>Thanks! I'll reply within 24 hours. Looking forward to connecting 🚀</p>
-          </div>
-          <form id="contact-form" novalidate>
-            <div class="form-2col">
-              <div class="form-grp">
-                <label class="form-lbl" for="f-name">Your Name</label>
-                <input id="f-name" type="text" class="form-inp" placeholder="John Doe" />
-                <div class="form-err" id="err-name">Enter your name.</div>
-              </div>
-              <div class="form-grp">
-                <label class="form-lbl" for="f-email">Email</label>
-                <input id="f-email" type="email" class="form-inp" placeholder="you@email.com" />
-                <div class="form-err" id="err-email">Enter a valid email.</div>
-              </div>
-            </div>
-            <div class="form-grp">
-              <label class="form-lbl" for="f-sub">Subject</label>
-              <input id="f-sub" type="text" class="form-inp" placeholder="Project Inquiry / Collaboration" />
-              <div class="form-err" id="err-sub">Enter a subject.</div>
-            </div>
-            <div class="form-grp">
-              <label class="form-lbl" for="f-msg">Message</label>
-              <textarea id="f-msg" class="form-ta" placeholder="Tell me about your project..."></textarea>
-              <div class="form-err" id="err-msg">Enter your message (10+ chars).</div>
-            </div>
-            <p class="send-error" id="send-error" style="display:none"></p>
-            <button type="submit" class="submit-btn" id="submit-btn">
-              <i class="fa-solid fa-paper-plane"></i>Send Message
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand gradient-text">Mubashir Qureshi</div>
-        <p class="footer-tagline">Data Analytics Student · WordPress Developer · Python Engineer<br>Islamabad / Rawalpindi, Pakistan 🇵🇰<br><em style="font-size:.8rem;color:var(--violet-light)">"Honest about what I know. Relentless about what I'm learning." ⚡</em></p>
-        <div class="footer-socials">
-          <a href="https://www.linkedin.com/in/mubashir-qureshi-0678192a7/" target="_blank" rel="noopener noreferrer" class="footer-social-a" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://github.com/mubashir-qureshii" target="_blank" rel="noopener noreferrer" class="footer-social-a" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="mailto:25-arid-3498@student.uaar.edu.pk" class="footer-social-a" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-head">Navigation</div>
-        <nav class="footer-link-list">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#timeline">Experience</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
-      <div>
-        <div class="footer-col-head">What I Do</div>
-        <div class="footer-link-list">
-          <span>Python & Web Scraping</span>
-          <span>Excel Dashboards & BI</span>
-          <span>WordPress Development</span>
-          <span>Full-Stack (Angular/.NET)</span>
-          <span>Data Analytics</span>
-          <span>OOP Engineering</span>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2025 <span>Mubashir Qureshi</span>. All rights reserved.</p>
-      <div class="footer-credit">Made with ❤️ &amp; lots of ☕</div>
-    </div>
-  </div>
-</footer>
-
-<button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-// ── EmailJS Init ─────────────────────────────────────────────────────────────
-// TODO: Replace 'YOUR_PUBLIC_KEY' with your EmailJS public key
-emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' });
-
-// ── Theme Toggle ──────────────────────────────────────────────────────────────
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = themeToggle.querySelector('i');
-let currentTheme = localStorage.getItem('mq-theme') || 'dark';
-document.documentElement.setAttribute('data-theme', currentTheme);
-updateThemeIcon();
-
-themeToggle.addEventListener('click', () => {
-  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  localStorage.setItem('mq-theme', currentTheme);
-  updateThemeIcon();
-});
-function updateThemeIcon() {
-  themeIcon.className = currentTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-}
-
-// ── Hamburger ─────────────────────────────────────────────────────────────────
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-hamburger.addEventListener('click', () => {
-  const open = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', open);
-  hamburger.setAttribute('aria-expanded', open);
-});
-function closeMobile() {
-  mobileMenu.classList.remove('open');
-  hamburger.classList.remove('open');
-  hamburger.setAttribute('aria-expanded', false);
-}
-
-// ── Navbar + Scroll Spy + Back to Top ────────────────────────────────────────
-const navbar = document.getElementById('navbar');
-const backTop = document.getElementById('back-to-top');
-const navAnchors = document.querySelectorAll('.nav-links a');
-
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  navbar.classList.toggle('scrolled', y > 60);
-  backTop.classList.toggle('visible', y > 400);
-  const pos = y + 92;
-  document.querySelectorAll('section[id]').forEach(s => {
-    if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
-      navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + s.id));
-    }
-  });
-}, { passive: true });
-
-backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-// ── Typed Text ────────────────────────────────────────────────────────────────
-const phrases = ['BS Data Analytics Student','WordPress Developer','Python & OOP Developer','Web Scraping Engineer','Full-Stack Developer'];
-let pIdx = 0, cIdx = 0, del = false;
-const typedEl = document.getElementById('typed');
-function typeTick() {
-  const cur = phrases[pIdx];
-  typedEl.textContent = del ? cur.slice(0, cIdx - 1) : cur.slice(0, cIdx + 1);
-  del ? cIdx-- : cIdx++;
-  let wait = del ? 60 : 115;
-  if (!del && cIdx === cur.length) { del = true; wait = 2000; }
-  else if (del && cIdx === 0) { del = false; pIdx = (pIdx + 1) % phrases.length; wait = 450; }
-  setTimeout(typeTick, wait);
-}
-setTimeout(typeTick, 900);
-
-// ── AOS Scroll Animations ─────────────────────────────────────────────────────
-const aosObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('aos-visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.aos-hidden').forEach(el => aosObserver.observe(el));
-
-// ── Skill Bars ────────────────────────────────────────────────────────────────
-const skillObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const pct = e.target.getAttribute('data-pct');
-      e.target.style.width = pct + '%';
-      skillObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.3 });
-document.querySelectorAll('.skill-fill').forEach(el => skillObserver.observe(el));
-
-// ── Animated Counters ─────────────────────────────────────────────────────────
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      const target = parseInt(el.getAttribute('data-target'));
-      const suffix = el.getAttribute('data-suffix') || '';
-      const t0 = performance.now();
-      const dur = 1600;
-      function run(now) {
-        const p = Math.min((now - t0) / dur, 1);
-        const v = Math.round((1 - Math.pow(1 - p, 3)) * target);
-        el.textContent = v + suffix;
-        if (p < 1) requestAnimationFrame(run);
-        else el.textContent = target + suffix;
-      }
-      requestAnimationFrame(run);
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.4 });
-document.querySelectorAll('.stat-number[data-target]').forEach(el => counterObserver.observe(el));
-
-// ── Contact Form ──────────────────────────────────────────────────────────────
-const form = document.getElementById('contact-form');
-const submitBtn = document.getElementById('submit-btn');
-const successBox = document.getElementById('success-box');
-const sendError = document.getElementById('send-error');
-
-function validate() {
-  const name = document.getElementById('f-name').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const sub = document.getElementById('f-sub').value.trim();
-  const msg = document.getElementById('f-msg').value.trim();
-  let ok = true;
-  function set(id, field, cond) {
-    document.getElementById(field).classList.toggle('err', cond);
-    document.getElementById(id).classList.toggle('show', cond);
-    if (cond) ok = false;
-  }
-  set('err-name','f-name', name.length < 2);
-  set('err-email','f-email', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
-  set('err-sub','f-sub', sub.length < 3);
-  set('err-msg','f-msg', msg.length < 10);
-  return ok;
-}
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  if (!validate()) return;
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>Sending...';
-  sendError.style.display = 'none';
-  try {
-    await emailjs.send('service_saoce3n', 'template_tf4dh1k', {
-      to_email: '25-arid-3498@student.uaar.edu.pk',
-      from_name: document.getElementById('f-name').value,
-      from_email: document.getElementById('f-email').value,
-      subject: document.getElementById('f-sub').value,
-      message: document.getElementById('f-msg').value,
-    });
-    form.style.display = 'none';
-    successBox.style.display = 'block';
-    setTimeout(() => {
-      form.style.display = 'block';
-      successBox.style.display = 'none';
-      form.reset();
-    }, 6000);
-  } catch (err) {
-    sendError.textContent = 'Could not send. Email me directly at 25-arid-3498@student.uaar.edu.pk';
-    sendError.style.display = 'block';
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>Send Message';
-  }
-});
-</script>
+  <script>
+    (function(){
+      var body=document.body;
+      body.classList.remove('no-js');
+      var topbar=document.getElementById('topbar');
+      var menu=document.getElementById('menu-toggle');
+      var links=document.getElementById('nav-links');
+      var status=document.getElementById('form-status');
+      var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.getElementById('year').textContent=new Date().getFullYear();
+      window.addEventListener('scroll',function(){topbar.classList.toggle('scrolled',window.scrollY>18)},{passive:true});
+      menu.addEventListener('click',function(){var open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation');menu.textContent=open?'×':'☰'});
+      links.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){links.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open navigation');menu.textContent='☰'})});
+      var roles=['useful digital tools','thoughtful websites','data workflows','full-stack systems'];
+      var role=document.getElementById('typed-role');
+      if(!reduced){var roleIndex=0;window.setInterval(function(){roleIndex=(roleIndex+1)%roles.length;role.style.opacity='0';window.setTimeout(function(){role.textContent=roles[roleIndex];role.style.opacity='1'},220)},2600)}
+      if('IntersectionObserver' in window&&!reduced){var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)})}else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible')})}
+      if(!reduced&&window.matchMedia('(pointer:fine)').matches){document.querySelectorAll('[data-tilt]').forEach(function(card){card.addEventListener('pointermove',function(event){var rect=card.getBoundingClientRect();var x=(event.clientX-rect.left)/rect.width-.5;var y=(event.clientY-rect.top)/rect.height-.5;card.style.setProperty('--rx',(-y*3.5).toFixed(2)+'deg');card.style.setProperty('--ry',(x*3.5).toFixed(2)+'deg')});card.addEventListener('pointerleave',function(){card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg')})})}
+      document.getElementById('contact-form').addEventListener('submit',function(event){
+        event.preventDefault();
+        var form=event.currentTarget;
+        if(form.elements['company-website'].value)return;
+        if(!form.reportValidity())return;
+        var name=form.elements.name.value.trim();
+        var email=form.elements.email.value.trim();
+        var subject=form.elements.subject.value.trim();
+        var message=form.elements.message.value.trim();
+        var recipient='25-arid-3498@student.uaar.edu.pk';
+        var bodyText='Hi Mubashir,\n\n'+message+'\n\n— '+name+'\nReply to: '+email;
+        var mailto='mailto:'+recipient+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(bodyText);
+        status.textContent='Your email app should open with the message ready. Review the draft and press Send. If it does not open, use the email link on the left.';
+        window.location.href=mailto;
+      });
+    })();
+  </script>
 </body>
 </html>
